@@ -1,13 +1,13 @@
 ﻿@model EduShop_Unsecure.Models.UserModel
-           
-@using (@Html.BeginForm())
+
+@using (@Html.BeginForm("Login", "ManageAccount", FormMethod.Post))
 {
-    @Html.LabelFor(m => m.Email, "Email:")
+    @Html.LabelFor(m => Model.Email, "Email:")
     @Html.TextBoxFor(m => Model.Email, new { @class = "form-control" })
     <br />
     @Html.LabelFor(m => Model.Password, "Password:")
     @Html.TextBoxFor(m => Model.Password, new { @class = "form-control" })
     <br />
-    <label>Remember me: <input type="checkbox" ></label><br/><br/>
+    @*<label>Remember me: <input type="checkbox" ></label><br/><br/>*@
     <input type="submit" class="btn btn-primary" value="Log In" />
 }

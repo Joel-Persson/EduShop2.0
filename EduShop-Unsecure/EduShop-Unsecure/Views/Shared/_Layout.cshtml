@@ -1,4 +1,5 @@
 ﻿@using EduShop_Unsecure.Models
+@using Microsoft.Ajax.Utilities
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +11,9 @@
     <link href="~/Content/Layout.css" rel="stylesheet" />
 </head>
 <body>
+    @{
+        var authenticated = Request.Cookies["Auth"];
+    }
     <div class="navbar navbar-inverse navbar-fixed-top">
         <a href="@Url.Action("Index","Home")">
             <img src="~/Images/Logo.svg" style="max-height:40px; margin:5px; float:left; margin-left:40px;" />
@@ -26,18 +30,24 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Products", "Product", "Home")</li>
-
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Login <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li>
-                                @Html.Action("Login", "ManageAccount")
-                            </li>
-                        </ul>
-                    </li>
-                    <li>@Html.ActionLink("Register", "Register", "ManageAccount")</li>
+                    @if (authenticated != null)
+                    {
+                        <li><a href="@Url.Action("LogOut", "ManageAccount")">Logout</a></li>
+                        <li><a>Email: @authenticated.Value</a></li>
+                    }
+                    else
+                    {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Login <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    @Html.Action("Login", "ManageAccount")
+                                </li>
+                            </ul>
+                        </li>
+                        <li>@Html.ActionLink("Register", "Register", "ManageAccount")</li>
+                    }
                 </ul>
-
 
                 @*@Html.Partial("_LoginPartial")*@
                 <ul class="nav navbar-nav navbar-right">
@@ -50,7 +60,7 @@
                         </ul>
                     </li>
                 </ul>
-                @Html.Action("Search","Home")
+                @Html.Action("Search", "Home")
             </div>
         </div>
     </div>
@@ -62,7 +72,7 @@
             <p>&copy; @DateTime.Now.Year Edument AB</p>
         </footer>
     </div>
-    
+
     <script src="~/Scripts/jquery.validate.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
     @Scripts.Render("~/bundles/jquery")
