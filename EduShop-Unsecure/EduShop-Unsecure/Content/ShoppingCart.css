@@ -1,0 +1,32 @@
+﻿.shoppingCartHeader {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    font-weight: 600;
+}
+
+.pusher {
+    clear: both;
+}
+
+.shoppingCartItem {
+    padding-bottom: 10px;
+}
+
+.shoppingCartSum {
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+    font-weight: 600;
+}
+
+.checkOut {
+    padding-top: 10px;
+    clear: both;
+}
+
+.receipt {
+    margin-bottom: 10px;
+    background-color: #f5f5f5;
+    border: solid 1px #ddd;
+    padding: 10px;
+}

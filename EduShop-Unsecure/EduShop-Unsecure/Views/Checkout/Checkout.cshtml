@@ -1,0 +1,105 @@
+﻿@model EduShop_Unsecure.Models.UserModel
+<link href="~/Content/ShoppingCart.css" rel="stylesheet" />
+<link href="~/Content/Forms.css" rel="stylesheet" />
+
+
+<article class="contentcontainer">
+    <section>
+        <div class="col-md-6">
+            <section class ="receipt">
+                <header class="shoppingCartHeader">
+                    <div class="col-md-8">
+                        Products
+                    </div>
+                    <div class="col-md-3">
+                        Price
+                    </div>
+                    <div class="pusher"></div>
+                </header>
+
+                <div class="shoppingCartItem">
+                    <div class="col-md-8">
+                        Windows 8 Pro x 1
+                    </div>
+                    <div class="col-md-3">
+                        199 €
+                    </div>
+                    <div class="pusher"></div>
+                </div>
+
+                <div class="shoppingCartItem">
+                    <div class="col-md-8">
+                        Windows 8 Pro x 1
+                    </div>
+                    <div class="col-md-3">
+                        199 €
+                    </div>
+                    <div class="pusher"></div>
+                </div>
+
+                <div class="shoppingCartSum">
+                    <div class="col-md-8">
+                        Total:
+                    </div>
+                    <div class="col-md-3">
+                        398 €
+                    </div>
+                </div>
+                <div class="pusher"></div>
+            </section>
+            <br />
+            @using (Html.BeginForm())
+            {
+                @Html.LabelFor(m => m.Email, "Email:")
+                @Html.TextBoxFor(m => Model.Email, new { @class = "form-control" })
+                <br />
+                @Html.LabelFor(m => Model.Password, "Password:")
+                @Html.TextBoxFor(m => Model.Password, new { @class = "form-control" })
+                <br />
+                @Html.LabelFor(m => Model.Password, "Firstname:")
+                @Html.TextBoxFor(m => Model.Password, new { @class = "form-control" })
+                <br />
+                @Html.LabelFor(m => Model.Password, "Lastname:")
+                @Html.TextBoxFor(m => Model.Password, new { @class = "form-control" })
+                <br />
+                @Html.LabelFor(m => Model.Password, "Address:")
+                @Html.TextBoxFor(m => Model.Password, new { @class = "form-control" })
+                <br />
+                @Html.LabelFor(m => Model.Password, "City:")
+                @Html.TextBoxFor(m => Model.Password, new { @class = "form-control" })
+                <br />
+                @Html.LabelFor(m => Model.Password, "Zip:")
+                @Html.TextBoxFor(m => Model.Password, new { @class = "form-control" })
+                <br />
+                <input type="submit" class="btn btn-primary" value="Order" />
+            }
+        </div>
+        <div class="col-md-6">
+            <section class="row">
+
+                <div class="circle">
+                    <div class="circletext">
+                        <p>Please make sure that all information is correct before you register</p>
+                    </div>
+                </div>
+
+                <div class="circle">
+                    <div class="circletext">
+                        <p>We will never ask you for your password. Do not share it with anyone!</p>
+                    </div>
+                </div>
+
+
+                <div class="circle">
+                    <div class="circletext">
+                        <p>If you like our service, please tell your family & friends about us!</p>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+        <div style="clear:both;"></div>
+    </section>
+</article>
+
+

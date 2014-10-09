@@ -1,0 +1,90 @@
+﻿@using System.Web.UI.WebControls
+@using Newtonsoft.Json
+@model EduShop_Unsecure.Models.UserModel
+@{
+    ViewBag.Title = "Register";
+}
+<link href="~/Content/Forms.css" rel="stylesheet" />
+
+@if (ViewBag.AlertMessage != null)
+{
+    <script>
+
+        window.onload = function () {
+            alert("@ViewBag.AlertMessage");
+        }
+
+    </script>
+
+}
+<article class="contentcontainer">
+    <section style="">
+        <div class="col-md-6">
+            <h1>Create an account.</h1>
+            <h3 id="justify">This is where you register a new account to become a member at EduShop</h3>
+            <br />
+            @using (Html.BeginForm())
+            {
+                @Html.LabelFor(m => m.Email, "Email:")
+                @Html.TextBoxFor(m => Model.Email, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => Model.Email)
+                <br />
+                @Html.LabelFor(m => Model.Password, "Password:")
+                @Html.PasswordFor(m => Model.Password, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => Model.Password)
+                <br />
+                @Html.LabelFor(m => Model.Firstname, "Firstname:")
+                @Html.TextBoxFor(m => Model.Firstname, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => Model.Firstname)
+                <br />
+                @Html.LabelFor(m => Model.Lastname, "Lastname:")
+                @Html.TextBoxFor(m => Model.Lastname, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => Model.Lastname)
+                <br />
+                @Html.LabelFor(m => Model.Address, "Address:")
+                @Html.TextBoxFor(m => Model.Address, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => Model.Address)
+                <br />
+                @Html.LabelFor(m => Model.City, "City:")
+                @Html.TextBoxFor(m => Model.City, new { @class = "form-control"})
+                @Html.ValidationMessageFor(m => Model.City)
+                <br />
+                @Html.LabelFor(m => Model.Zip, "Zip:")
+                @Html.TextBoxFor(m => Model.Zip, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => Model.Zip)
+                <br />
+                @Html.LabelFor(m => Model.Phone, "Phone:")
+                @Html.TextBoxFor(m => Model.Phone, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => Model.Phone)
+                <br />
+                @Html.HiddenFor(m => Model.IsAdmin, new { Value = 0 })
+                <input type="submit" class="btn btn-primary" value="Register" />
+            }
+        </div>
+        <div class="col-md-6">
+            <section class="row">
+
+                <div class="circle">
+                    <div class="circletext">
+                        <p>Please make sure that all information is correct before you register</p>
+                    </div>
+                </div>
+
+                <div class="circle">
+                    <div class="circletext">
+                        <p>We will never ask you for your password. Do not share it with anyone!</p>
+                    </div>
+                </div>
+
+
+                <div class="circle">
+                    <div class="circletext">
+                        <p>If you like our service, please tell your family & friends about us!</p>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+        <div style="clear:both;"></div>
+    </section>
+</article>

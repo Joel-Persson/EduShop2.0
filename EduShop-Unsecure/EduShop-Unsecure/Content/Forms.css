@@ -1,0 +1,54 @@
+﻿body {
+}
+
+.form-control {
+}
+
+.col-md-6 {
+    padding: 30px 0px;
+    border-left: 1px dotted #ddd;
+    margin:20px 0px;
+}
+
+    .col-md-6:first-child {
+        border-left: none;
+        padding: 30px 60px;
+        
+    }
+
+.circle {
+    margin: auto;
+    margin-top: 15px;
+    border-left: none;
+}
+
+#justify {
+    text-align: justify;
+}
+
+.field-validation-error
+{
+    color: #ff0000;
+}
+
+.field-validation-valid
+{
+    display: none;
+}
+
+.input-validation-error
+{
+    border: 1px solid #ff0000;
+    background-color: #ffeeee;
+}
+
+.validation-summary-errors
+{
+    font-weight: bold;
+    color: #ff0000;
+}
+
+.validation-summary-valid
+{
+    display: none;
+}

@@ -1,0 +1,34 @@
+﻿@model List<EduShop_Unsecure.Models.ProductModel>
+@{
+    ViewBag.Title = "ProductModel";
+}
+<article class="contentcontainer">
+    <div style="margin-top:20px;">
+        <link href="~/Content/Product.css" rel="stylesheet" />
+
+        <div>
+            @Html.Action("Sidebar", "Home")
+        </div>
+
+        <article class="col-md-9">
+
+            <div class="panel panel-default">
+
+                <div class="panel-heading">
+
+                    <h4 class="panel-title"><span class="glyphicon glyphicon-th"></span> Products</h4>
+                </div>
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+                        @Html.Action("ProductPartial", "Home", new { item.Id })
+                    }
+                </div>
+
+            </div>
+
+        </article>
+
+    </div>
+    <div style="clear:both"></div>
+</article>

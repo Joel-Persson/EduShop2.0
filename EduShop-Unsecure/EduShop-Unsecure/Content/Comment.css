@@ -1,0 +1,27 @@
+﻿body {
+}
+
+.comment-section{
+
+}
+.Comment-Content{
+    padding:20px;
+}
+
+.comment-section.panel.panel-default{
+        -webkit-box-shadow: 10px 10px 10px rgba(0,0,0,0.3);
+    -ms-box-shadow: 10px 10px 10px rgba(0,0,0,0.3);
+    box-shadow: 10px 10px 10px rgba(0,0,0,0.3);
+}
+
+.comment-section.panel-default>.panel-heading{
+    background-color:#ddd;
+}
+
+.nav-tabs.nav-justified > li > a {
+    border: 1px solid #ddd;
+}
+
+.whitestar .rating-container{
+    color:white;
+}

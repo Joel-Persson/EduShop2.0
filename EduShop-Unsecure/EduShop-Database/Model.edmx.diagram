@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7547d6f685fd41ebbb460a2277fd90d4" Name="Diagram1" >
+        <EntityTypeShape EntityType="EduShopModel.User" Width="1.5" PointX="8.75" PointY="0.5" FillColor="Lime" />
+        <EntityTypeShape EntityType="EduShopModel.Product" Width="1.5" PointX="3.5" PointY="0.5" FillColor="Maroon" />
+        <EntityTypeShape EntityType="EduShopModel.Order" Width="1.5" PointX="7" PointY="0.5" />
+        <EntityTypeShape EntityType="EduShopModel.OrderRow" Width="1.5" PointX="5.25" PointY="0.5" />
+        <EntityTypeShape EntityType="EduShopModel.Review" Width="1.5" PointX="1.75" PointY="0.5" FillColor="Maroon" />
+        <AssociationConnector Association="EduShopModel.UserOrder" />
+        <AssociationConnector Association="EduShopModel.OrderOrderRow" />
+        <AssociationConnector Association="EduShopModel.ProductOrderRow" />
+        <AssociationConnector Association="EduShopModel.ProductReview" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

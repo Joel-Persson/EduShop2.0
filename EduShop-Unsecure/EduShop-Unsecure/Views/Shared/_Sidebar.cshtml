@@ -1,0 +1,27 @@
+﻿
+<link href="~/Content/Product.css" rel="stylesheet" />
+
+<div>
+    <div class="col-md-3 sidebar">
+        <div class="list-group">
+            <a href="@Url.Action("Product","Home")" class="list-group-item">
+                Software
+            </a>
+            <a href="@Url.Action("Product","Home",new {category ="Operating system"})" class="list-group-item">
+                Operating System
+            </a>
+            <a href="@Url.Action("Product", "Home", new { category = "Anti-Malware Software" })" class="list-group-item">
+                Anti-Malware Software
+            </a>
+            <a href="@Url.Action("Product", "Home", new { category = "Adobe" })" class="list-group-item">
+                Adobe
+            </a>
+            <a href="@Url.Action("Product", "Home", new { category = "Office" })" class="list-group-item">
+                Office
+            </a>
+            <a href="@Url.Action("Product", "Home", new { category = "Plugin" })" class="list-group-item">
+                Plugins <span class="badge">New!</span>
+            </a>
+        </div>
+    </div>
+</div>

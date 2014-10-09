@@ -1,0 +1,28 @@
+﻿@using System.Text.RegularExpressions
+@model List<EduShop_Unsecure.Models.ReviewModel>           
+<link href="~/Content/Comment.css" rel="stylesheet" />
+<link href="~/Content/star-rating.css" rel="stylesheet" />
+@foreach (var item in Model)
+{
+    <div class="panel panel-default comment-section">
+        <div class="panel-heading">
+        @if (item.Rating != null)
+        {
+                
+            
+            <div class="whitestar" style="float: right">
+                <input id="input-id" type="number" class="rating" min=0 max=5 step="1" data-size="s" data-rtl="false"
+                       value="@item.Rating" data-readonly="true" data-show-clear="false" data-show-caption="false">
+            </div>
+        }
+            <h2 class="panel-title">@item.Title</h2>
+        </div>
+
+        <section class="Comment-Content">
+            <p>@item.Content</p>
+            <div style="padding: 10px; border-top:1px solid #ddd">
+                @item.DateAdded
+            </div>
+        </section>
+    </div>
+}
