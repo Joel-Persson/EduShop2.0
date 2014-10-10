@@ -21,15 +21,16 @@ namespace EduShop_Unsecure.Controllers
         //}
         public ActionResult Product(string category, string search)
         {
-            if (category == null && search==null)
+            if (category == null && search == null)
             {
                 return View(ProductModel.ProductModelsToList());
             }
-             if (search!=null)
+            if (search != null)
             {
                 return View(ProductModel.ProductModelsToListSearch(search));
             }
-                return View(ProductModel.ProductModelsToListCategory(category));
+            ViewBag.Category = category;
+            return View(ProductModel.ProductModelsToListCategory(category));
 
         }
 
@@ -102,7 +103,7 @@ namespace EduShop_Unsecure.Controllers
         //public ActionResult Review(ReviewModel review)
         //{
         //    ProductModel.AddOrUpdateProductRating(review.ProductId);
-            
+
         //    ReviewModel.AddReview(ReviewModel.ConvertToReview(review));
         //    return RedirectToAction("ProductInfo", "Home", new {id = review.ProductId});
         //}

@@ -16,7 +16,16 @@
 
                 <div class="panel-heading">
 
-                    <h4 class="panel-title"><span class="glyphicon glyphicon-th"></span> Products</h4>
+                    <h4 class="panel-title"><span class="glyphicon glyphicon-th"></span>
+                        @if (string.IsNullOrEmpty(ViewBag.Category))
+                        {
+                            <span>Products</span>
+                        }
+                        else
+                        {
+                            @ViewBag.Category
+                        }
+                    </h4>
                 </div>
                 <div class="row">
                     @foreach (var item in Model)

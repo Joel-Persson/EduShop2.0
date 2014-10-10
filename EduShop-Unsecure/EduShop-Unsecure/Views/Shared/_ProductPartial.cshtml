@@ -1,5 +1,7 @@
 ﻿@model EduShop_Unsecure.Models.ProductModel
-
+@{
+    var authenticated = Request.Cookies["Auth"];
+}
 <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
         <a href="@Url.Action("ProductInfo","Home", new {Model.Id})">
@@ -7,14 +9,20 @@
         </a>
         
         <div class="caption">
-            <h3>@Model.Name</h3>
-            <p style="min-height: 40px;">@Model.ShortDescription</p>
+            <div style="min-height: 100px;">
+                <h3>@Model.Name</h3>
+                <p >@Model.ShortDescription</p>
+            </div>
             <p>
                 <div class="btn-group btn-group-justified btn-group-lg">
-                    <a href="#" class="btn btn-primary btn-lg" role="button">@Model.Price <span class="glyphicon glyphicon-shopping-cart"></span></a>
+                    @if (authenticated != null)
+                    {
+                        <a href="#" class="btn btn-primary btn-lg" role="button">@Model.Price <span class="glyphicon glyphicon-shopping-cart"></span></a>
+                    }
                     <a href="@Url.Action("ProductInfo","Home", new {Model.Id})" class=" btn btn-default btn-lg" role="button">Info</a>
                 </div>
             </p>
+
         </div>
     </div>
 </div>

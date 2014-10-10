@@ -35,7 +35,22 @@ INSERT INTO [dbo].[ProductSet]
 		   '~/Images/Dummy_Item_Image(245x245).png',
 		   '3',
 		   'Mac OS is a series of graphical user interface-based operating systems developed by Apple Inc. for their Macintosh line of computer systems.',
-		   'Operating System')
+		   'Operating System'),
+		   		   ('Windows 7 Premium',
+		   '99',
+		   'Windows 7 Home Premium SP1 64bit',
+		   '~/Images/Windows7.jpg',
+		   '0',
+		   'Windows 7 Home Premium makes it easy to create a home network and share all of your favorite photos, videos, and music. You can even watch, pause, rewind, and record TV (a broadcast TV tuner may be required). Get the best entertainment experience with Windows 7 Home Premium. Do you use your PC for work, run Windows XP programs, or require enhanced security? Consider Windows 7 Professional.',
+		   'Operating System'),
+		   		   		   ('Visual Studio 2010',
+		   '249',
+		   'Microsoft Visual Studio 2010 Professional Edition',
+		   '~/Images/VisualStudio2010.jpg',
+		   '0',
+		   'User Integrated Development EnvironmentDevelopment Platform SupporTesting Tools Microsoft Visual Studio 2010 Professional is the essential tool for individuals performing basic development tasks. It simplifies the creation, debugging, and deployment of applications on a variety of platforms including SharePoint and the Cloud. Visual Studio 2010 Professional comes with integrated support for test-driven development, as well as debugging tools that help ensure high-quality solutions. Academic C5E-00525 Complete Product DVD-ROM Microsoft Microsoft Corporation PC Software Visual Studio 2010 Professional Visual Studio 2010 Professional Edition Windows www.microsoft.com',
+		   'Microsoft')
+
 		   
 
 GO
