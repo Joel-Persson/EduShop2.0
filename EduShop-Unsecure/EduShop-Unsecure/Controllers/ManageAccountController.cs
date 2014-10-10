@@ -21,22 +21,17 @@ namespace EduShop_Unsecure.Controllers
         [HttpPost]
         public ActionResult Login(UserModel model)
         {
-
-            if (model.Email == "Test@test.com" && model.Password == "12345678")
+            if (ModelState.IsValid) {
+            if (UserModel.CheckForUser(model) != null)
             {
                 HttpCookie authentication = new HttpCookie("Auth");
                 authentication.Value = model.Email;
                 Response.Cookies.Add(authentication);
                 return RedirectToAction("Index", "Home");
-                //return PartialView("_Login");
             }
             return RedirectToAction("Index", "Home");
-            //var userModel = new UserModel();//todo....
-            //var user = new User();
-
-            //user = UserModel.CheckForUser(model);
-
-            //userModel = UserModel.ConvertToUserModel(user);
+            }
+            return RedirectToAction("Index", "Home", model);
         }
 
         public ActionResult LogOut()

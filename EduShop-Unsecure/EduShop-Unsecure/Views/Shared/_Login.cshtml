@@ -4,10 +4,25 @@
 {
     @Html.LabelFor(m => Model.Email, "Email:")
     @Html.TextBoxFor(m => Model.Email, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m=> Model.Email)
     <br />
     @Html.LabelFor(m => Model.Password, "Password:")
-    @Html.TextBoxFor(m => Model.Password, new { @class = "form-control" })
+    @Html.PasswordFor(m => Model.Password, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m=> Model.Password)
+
+    @Html.HiddenFor(m => Model.Firstname, new { Value = "John" })
+
+    @Html.HiddenFor(m => Model.Lastname, new { Value = "Doe" })
+
+    @Html.HiddenFor(m => Model.Address, new { Value = "None" })
+
+    @Html.HiddenFor(m => Model.City, new { Value = "None" })
+
+    @Html.HiddenFor(m => Model.Zip, new { Value = "12345" })
+
+    @Html.HiddenFor(m => Model.Phone, new { Value = "1234567890" })
     <br />
+    @Html.HiddenFor(m => Model.IsAdmin, new { Value = false })
     @*<label>Remember me: <input type="checkbox" ></label><br/><br/>*@
     <input type="submit" class="btn btn-primary" value="Log In" />
 }

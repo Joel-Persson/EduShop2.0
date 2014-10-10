@@ -21,7 +21,7 @@ namespace EduShop_Unsecure.Models
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Can not be empty!")]
-        [StringLength(32,ErrorMessage = "Check your password!", MinimumLength = 8)]
+        [StringLength(32,ErrorMessage = "Check your password!", MinimumLength = 6)]
         public string Password { get; set; }
 
          [Required(ErrorMessage = "Can not be empty!")]
@@ -38,7 +38,6 @@ namespace EduShop_Unsecure.Models
 
          [Required(ErrorMessage = "Can not be empty!")]
          [DataType(DataType.PostalCode, ErrorMessage = "Check your zip!")]
-         [Range(0, 99999, ErrorMessage = "Check your zip!")]
         public string Zip { get; set; }
 
          [Required(ErrorMessage = "Can not be empty!")]
@@ -46,7 +45,8 @@ namespace EduShop_Unsecure.Models
         public string City { get; set; }
 
          [Required(ErrorMessage = "Can not be empty!")]
-         [Range(0, 99999, ErrorMessage = "Check your phone!")]
+         [StringLength(20,ErrorMessage = "Your phone number is too long")]
+         [DataType(DataType.PhoneNumber, ErrorMessage = "Invalid phone number")]
         public string Phone { get; set; }
 
         public bool IsAdmin { get; set; }

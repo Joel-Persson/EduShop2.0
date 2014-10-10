@@ -33,7 +33,7 @@
                     @if (authenticated != null)
                     {
                         <li><a href="@Url.Action("LogOut", "ManageAccount")">Logout</a></li>
-                        <li><a>Email: @authenticated.Value</a></li>
+                        <li>@Html.ActionLink("Edit Profile", "Index", "Home")</li>
                     }
                     else
                     {
