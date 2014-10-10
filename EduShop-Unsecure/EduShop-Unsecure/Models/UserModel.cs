@@ -13,7 +13,7 @@ namespace EduShop_Unsecure.Models
     public class UserModel
     {
 
-       private static readonly EduShopEntities context = new EduShopEntities();
+        private static readonly EduShopEntities context = new EduShopEntities();
 
         public int Id { get; set; }
         [Required(ErrorMessage = "Can not be empty!")]
@@ -21,32 +21,32 @@ namespace EduShop_Unsecure.Models
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Can not be empty!")]
-        [StringLength(32,ErrorMessage = "Check your password!", MinimumLength = 6)]
+        [StringLength(32, ErrorMessage = "Check your password!", MinimumLength = 6)]
         public string Password { get; set; }
 
-         [Required(ErrorMessage = "Can not be empty!")]
+        [Required(ErrorMessage = "Can not be empty!")]
         [StringLength(40, ErrorMessage = "Check your firstname!", MinimumLength = 2)]
         public string Firstname { get; set; }
 
-         [Required(ErrorMessage = "Can not be empty!")]
-         [StringLength(40, ErrorMessage = "Check your lastname!", MinimumLength = 2)]
+        [Required(ErrorMessage = "Can not be empty!")]
+        [StringLength(40, ErrorMessage = "Check your lastname!", MinimumLength = 2)]
         public string Lastname { get; set; }
 
-         [Required(ErrorMessage = "Can not be empty!")]
-         [StringLength(40, ErrorMessage = "Check your address!", MinimumLength = 2)]
+        [Required(ErrorMessage = "Can not be empty!")]
+        [StringLength(70, ErrorMessage = "Check your address!", MinimumLength = 2)]
         public string Address { get; set; }
 
-         [Required(ErrorMessage = "Can not be empty!")]
-         [DataType(DataType.PostalCode, ErrorMessage = "Check your zip!")]
+        [Required(ErrorMessage = "Can not be empty!")]
+        [DataType(DataType.PostalCode, ErrorMessage = "Check your zip!")]
         public string Zip { get; set; }
 
-         [Required(ErrorMessage = "Can not be empty!")]
-         [StringLength(40, ErrorMessage = "Check your City!", MinimumLength = 2)]
+        [Required(ErrorMessage = "Can not be empty!")]
+        [StringLength(40, ErrorMessage = "Check your City!", MinimumLength = 2)]
         public string City { get; set; }
 
-         [Required(ErrorMessage = "Can not be empty!")]
-         [StringLength(20,ErrorMessage = "Your phone number is too long")]
-         [DataType(DataType.PhoneNumber, ErrorMessage = "Invalid phone number")]
+        [Required(ErrorMessage = "Can not be empty!")]
+        [StringLength(20, ErrorMessage = "Your phone number is too long")]
+        [DataType(DataType.PhoneNumber, ErrorMessage = "Invalid phone number")]
         public string Phone { get; set; }
 
         public bool IsAdmin { get; set; }
@@ -64,7 +64,7 @@ namespace EduShop_Unsecure.Models
             var userModel = new UserModel()
             {
                 Id = user.Id,
-                 Email= user.Email,
+                Email = user.Email,
                 Password = user.Password,
                 Firstname = user.Firstname,
                 Lastname = user.Lastname,
@@ -115,6 +115,14 @@ namespace EduShop_Unsecure.Models
             AddUser(user);
 
             return true;
+        }
+
+        public static UserModel GetUser(string email)
+        {
+
+           return ConvertToUserModel((from c in context.UserSet
+                                          where c.Email == email
+                                          select c).FirstOrDefault());
         }
     }
 }

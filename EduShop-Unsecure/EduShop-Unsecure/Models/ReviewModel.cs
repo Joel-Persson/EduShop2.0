@@ -5,6 +5,7 @@ using System.Web;
 using EduShop_Database;
 using Microsoft.Ajax.Utilities;
 
+
 namespace EduShop_Unsecure.Models
 {
     public class ReviewModel
@@ -28,7 +29,7 @@ namespace EduShop_Unsecure.Models
                 Content = review.Content,
                 Title = review.Title,
                 Rating = review.Rating,
-                DateAdded = review.DateAdded 
+                DateAdded = review.DateAdded
             };
             return reviewModel;
         }
@@ -52,7 +53,7 @@ namespace EduShop_Unsecure.Models
             return (
                 from c in context.ReviewSet
                 where c.ProductId == id
-                orderby c.DateAdded descending 
+                orderby c.DateAdded descending
                 select c).ToList();
         }
 
@@ -74,6 +75,26 @@ namespace EduShop_Unsecure.Models
                 allReviewModels.Add(ConvertToReviewModel(item));
             }
             return allReviewModels;
+        }
+
+        public static int RoundUpStarsToEven(double starRating)
+        {
+            int evenRating = Convert.ToInt32(Math.Round(starRating, MidpointRounding.ToEven));
+            return evenRating;
+        }
+
+        public static int CalculateAverageRating(int id)
+        {
+            List<Review> reviews = new List<Review>();
+            reviews = GetReviews(id);
+            double value = 0;
+
+            foreach (var item in reviews)
+            {
+                value += item.Rating;
+            }
+
+            return RoundUpStarsToEven(value / reviews.Count);
         }
     }
 

@@ -85,5 +85,19 @@ namespace EduShop_Unsecure.Controllers
         {
             return PartialView("_ShoppingCart");
         }
+
+
+        public ActionResult Edit()
+        {
+            return View(UserModel.GetUser(Request.Cookies["Auth"].Value));
+        }
+
+        [HttpPost]
+        public ActionResult Edit(UserModel model)
+        {
+            UserModel.AddUser(UserModel.ConvertToUser(model));
+
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

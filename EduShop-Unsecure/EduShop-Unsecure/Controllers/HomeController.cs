@@ -62,6 +62,7 @@ namespace EduShop_Unsecure.Controllers
         [HttpPost]
         public ActionResult ProductInfo(ProductInfoModel review)
         {
+            ProductModel.AddOrUpdateProductRating(review.ReviewModel.ProductId);
             ReviewModel.AddReview(ReviewModel.ConvertToReview(review.ReviewModel));
             return RedirectToAction("ProductInfo", "Home", new { id = review.ReviewModel.ProductId });
         }
@@ -97,13 +98,14 @@ namespace EduShop_Unsecure.Controllers
             return PartialView("_Review");
         }
 
-        [HttpPost]
-        public ActionResult Review(ReviewModel review)
-        {
-
-            ReviewModel.AddReview(ReviewModel.ConvertToReview(review));
-            return RedirectToAction("ProductInfo", "Home", new {id = review.ProductId});
-        }
+        //[HttpPost]
+        //public ActionResult Review(ReviewModel review)
+        //{
+        //    ProductModel.AddOrUpdateProductRating(review.ProductId);
+            
+        //    ReviewModel.AddReview(ReviewModel.ConvertToReview(review));
+        //    return RedirectToAction("ProductInfo", "Home", new {id = review.ProductId});
+        //}
 
         public ActionResult Search(SearchModel searchModel)
         {

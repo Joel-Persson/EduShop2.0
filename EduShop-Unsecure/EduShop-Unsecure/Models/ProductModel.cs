@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Security.AccessControl;
 using System.Web;
@@ -127,6 +128,17 @@ namespace EduShop_Unsecure.Models
                 allProductModels.Add(ConvertToProductModel(item));
             }
             return allProductModels;
+        }
+
+        public static int AddOrUpdateProductRating(int id)
+        {
+            int rating = ReviewModel.CalculateAverageRating(id);
+            Product product = GetProduct(id);
+            product.AverageRating = rating;
+
+            context.ProductSet.AddOrUpdate(product);
+            return context.SaveChanges();
+
         }
     }
 }
