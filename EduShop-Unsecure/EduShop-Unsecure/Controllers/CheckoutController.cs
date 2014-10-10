@@ -13,6 +13,8 @@ namespace EduShop_Unsecure.Controllers
         [HttpGet]
         public ActionResult Checkout()
         {
+            var user = UserModel.GetUser(Request.Cookies["Auth"].Value);
+            var order = Session["Order"];
             return View();
         }
 

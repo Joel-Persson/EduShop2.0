@@ -15,5 +15,6 @@ namespace EduShop_Unsecure.Models
         public string Zip { get; set; }
         public string City { get; set; }
         public string Phone { get; set; }
+        public List<OrderRowModel> Type { get; set; }
     }
 }
