@@ -21,17 +21,29 @@ namespace EduShop_Unsecure.Controllers
         [HttpPost]
         public ActionResult Login(UserModel model)
         {
-            if (ModelState.IsValid) {
-            if (UserModel.CheckForUser(model) != null)
+            if (ModelState.IsValid)
             {
-                HttpCookie authentication = new HttpCookie("Auth");
-                authentication.Value = model.Email;
-                Response.Cookies.Add(authentication);
+                if (UserModel.CheckForUser(model) != null)
+                {
+                    SetOrderSession();
+                    SetAuthenticationCookie(model);
+                    return RedirectToAction("Index", "Home");
+                }
                 return RedirectToAction("Index", "Home");
             }
-            return RedirectToAction("Index", "Home");
-            }
             return RedirectToAction("Index", "Home", model);
+        }
+
+        private void SetOrderSession()
+        {
+            HttpContext.Session["Order"] = new List<OrderRowModel>();
+        }
+
+        private void SetAuthenticationCookie(UserModel model)
+        {
+            HttpCookie authentication = new HttpCookie("Auth");
+            authentication.Value = model.Email;
+            Response.Cookies.Add(authentication);
         }
 
         public ActionResult LogOut()
@@ -55,23 +67,23 @@ namespace EduShop_Unsecure.Controllers
         {
             if (ModelState.IsValid)
             {
-                
-           
-            var user = new User();
 
-            user = UserModel.ConvertToUser(model);
 
-            bool validate = UserModel.CheckIfUSerEmailIsUnique(user);
+                var user = new User();
 
-            if (validate)
-            {
-                return RedirectToAction("Index", "Home");
+                user = UserModel.ConvertToUser(model);
+
+                bool validate = UserModel.CheckIfUSerEmailIsUnique(user);
+
+                if (validate)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                ViewBag.AlertMessage = "This email is already in use";
+                return View(model);
             }
-            ViewBag.AlertMessage = "This email is already in use";
             return View(model);
-            }
-            return View(model);
-           
+
         }
 
         public ActionResult ShoppingCart()

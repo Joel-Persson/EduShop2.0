@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using EduShop_Database;
 using EduShop_Unsecure.Models;
 
 namespace EduShop_Unsecure.Controllers
@@ -15,10 +16,30 @@ namespace EduShop_Unsecure.Controllers
             return View();
         }
 
-        //public ActionResult Product()
-        //{
+        public ActionResult BuyProduct(List<OrderRowModel> orderRows, int id)
+        {
+            if (orderRows == null)
+            {
+                orderRows = new List<OrderRowModel>();
+            }
 
-        //}
+            var orderRowList = new List<OrderRowModel>();
+            orderRowList = orderRows;
+
+            var orderRow = new OrderRowModel()
+            {
+                ProductId = id,
+                Quantity = 1
+            };
+
+            orderRowList.Add(orderRow);
+
+            Session["Order"] = orderRowList;
+
+
+            return RedirectToAction("ProductInfo", id);
+        }
+
         public ActionResult Product(string category, string search)
         {
             if (category == null && search == null)
@@ -41,11 +62,6 @@ namespace EduShop_Unsecure.Controllers
             return PartialView("_ProductPartial", productModel);
         }
 
-        //[HttpPost]
-        //public ActionResult ProductPartial(string product)
-        //{
-        //    return PartialView("_ProductPartial");
-        //}
 
         public ActionResult ProductInfo(int id)
         {
@@ -98,16 +114,6 @@ namespace EduShop_Unsecure.Controllers
             ViewBag.ProductId = id;
             return PartialView("_Review");
         }
-
-        //[HttpPost]
-        //public ActionResult Review(ReviewModel review)
-        //{
-        //    ProductModel.AddOrUpdateProductRating(review.ProductId);
-
-        //    ReviewModel.AddReview(ReviewModel.ConvertToReview(review));
-        //    return RedirectToAction("ProductInfo", "Home", new {id = review.ProductId});
-        //}
-
         public ActionResult Search(SearchModel searchModel)
         {
 
