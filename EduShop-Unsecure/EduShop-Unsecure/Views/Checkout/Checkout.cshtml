@@ -1,4 +1,5 @@
-﻿@model EduShop_Unsecure.Models.UserModel
+﻿@using EduShop_Unsecure.Models
+@model EduShop_Unsecure.Models.UserModel
 <link href="~/Content/ShoppingCart.css" rel="stylesheet" />
 <link href="~/Content/Forms.css" rel="stylesheet" />
 
@@ -7,6 +8,8 @@
     <section>
         <div class="col-md-6">
             <section class ="receipt">
+               @if (HttpContext.Current.Session["Order"] != null)
+               {
                 <header class="shoppingCartHeader">
                     <div class="col-md-8">
                         Products
@@ -16,35 +19,26 @@
                     </div>
                     <div class="pusher"></div>
                 </header>
+                   int total;
+                   foreach (var item in Session["Order"] as List<OrderRowModel>)
+                   {
+                    @*<p>@item.ProductId</p>*@
+                    @Html.Action("ShoppingCartItemPartial", "ManageAccount", new { id = item.ProductId })
+                   }
 
-                <div class="shoppingCartItem">
-                    <div class="col-md-8">
-                        Windows 8 Pro x 1
-                    </div>
-                    <div class="col-md-3">
-                        199 €
-                    </div>
-                    <div class="pusher"></div>
-                </div>
-
-                <div class="shoppingCartItem">
-                    <div class="col-md-8">
-                        Windows 8 Pro x 1
-                    </div>
-                    <div class="col-md-3">
-                        199 €
-                    </div>
-                    <div class="pusher"></div>
-                </div>
-
-                <div class="shoppingCartSum">
-                    <div class="col-md-8">
-                        Total:
-                    </div>
-                    <div class="col-md-3">
-                        398 €
-                    </div>
-                </div>
+                @*<div class="shoppingCartSum">
+                        <div class="col-md-8">
+                            Total:
+                        </div>
+                        <div class="col-md-3">
+                            398 €
+                        </div>
+                    </div>*@
+               }
+               else
+               {
+                <header class="shoppingCartHeader">Your shoppingcart is empty.</header>
+               }
                 <div class="pusher"></div>
             </section>
             <br />

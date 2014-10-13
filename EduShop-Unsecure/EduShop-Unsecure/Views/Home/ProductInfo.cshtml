@@ -1,4 +1,6 @@
-﻿@model EduShop_Unsecure.Models.ProductInfoModel
+﻿@using System.Data.Entity.Core.Objects
+@using EduShop_Unsecure.Models
+@model EduShop_Unsecure.Models.ProductInfoModel
 @{
     var authenticated = Request.Cookies["Auth"];
 }
@@ -37,23 +39,23 @@
                         
                         @if (authenticated != null)
                         {
-                                 <a href=@Url.Action("BuyProduct","Home", new { orderRows =  Session["Order"], id =  Model.ProductModel.Id})>
+                            <a href=@Url.Action("BuyProduct","Home", new {id =  Model.ProductModel.Id})>
                            
-                                     @*@Html.ActionLink("Add to cart","BuyProduct", "Home", new { orderModel = Session["Order"], id = Model.ProductModel.Id })*@
+                                @*@Html.ActionLink("Add to cart","BuyProduct", "Home", new { orderModel = Session["Order"], id = Model.ProductModel.Id })*@
                                      
-                                     @*@Session["Order"] = new*@
+                                @*@Session["Order"] = new*@
 
-                                     <div class="btn-group btn-group-justified btn-group-lg">
+                                <div class="btn-group btn-group-justified btn-group-lg">
 
-                                         <h2 class="btn btn-danger btn-lg"> @Model.ProductModel.Price €</h2>
+                                    <h2 class="btn btn-danger btn-lg"> @Model.ProductModel.Price €</h2>
 
 
-                                         <h2 class="btn btn-primary btn-lg" role="button">
-                                             Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span>
-                                         </h2>
+                                    <h2 class="btn btn-primary btn-lg" role="button">
+                                        Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span>
+                                    </h2>
 
-                                     </div>
-                                 </a>
+                                </div>
+                            </a>
                         }
                         else
                         {

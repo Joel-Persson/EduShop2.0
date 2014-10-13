@@ -25,7 +25,7 @@ namespace EduShop_Unsecure.Controllers
             {
                 if (UserModel.CheckForUser(model) != null)
                 {
-                    SetOrderSession();
+                    //SetOrderSession();
                     SetAuthenticationCookie(model);
                     return RedirectToAction("Index", "Home");
                 }
@@ -53,6 +53,7 @@ namespace EduShop_Unsecure.Controllers
                 HttpCookie authentication = new HttpCookie("Auth");
                 authentication.Expires = DateTime.Now.AddDays(-1d);
                 Response.Cookies.Add(authentication);
+                Session["Order"] = null;
             }
             return RedirectToAction("Index", "Home");
         }
@@ -96,6 +97,13 @@ namespace EduShop_Unsecure.Controllers
         public ActionResult ShoppingCart(List<OrderRowModel> orderRows)
         {
             return PartialView("_ShoppingCart");
+        }
+
+        public ActionResult ShoppingCartItemPartial(int id)
+        {
+            var productModel = ProductModel.ConvertToProductModel(ProductModel.GetProduct(id));
+
+            return PartialView("_ShoppingCartItemPartial", productModel);
         }
 
 

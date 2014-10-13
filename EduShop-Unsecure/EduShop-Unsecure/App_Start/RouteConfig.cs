@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -12,12 +13,6 @@ namespace EduShop_Unsecure
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-  
-           // routes.MapRoute(
-           //    name: "Default1",
-           //    url: "{controller}/{action}/{orderModel}/{id}",
-           //    defaults: new { controller = "Home", action = "BuyProduct", orderModel = UrlParameter.Optional }
-           //);
 
             routes.MapRoute(
                 name: "Default",
