@@ -1,5 +1,5 @@
 ﻿@using EduShop_Unsecure.Models
-@model EduShop_Unsecure.Models.UserModel
+@model EduShop_Unsecure.Models.OrderModel
 <link href="~/Content/ShoppingCart.css" rel="stylesheet" />
 <link href="~/Content/Forms.css" rel="stylesheet" />
 
@@ -7,64 +7,69 @@
 <article class="contentcontainer">
     <section>
         <div class="col-md-6">
-            <section class ="receipt">
-               @if (HttpContext.Current.Session["Order"] != null)
-               {
-                <header class="shoppingCartHeader">
-                    <div class="col-md-8">
-                        Products
-                    </div>
-                    <div class="col-md-3">
-                        Price
-                    </div>
-                    <div class="pusher"></div>
-                </header>
-                   int total;
-                   foreach (var item in Session["Order"] as List<OrderRowModel>)
-                   {
-                    @*<p>@item.ProductId</p>*@
-                    @Html.Action("ShoppingCartItemPartial", "ManageAccount", new { id = item.ProductId })
-                   }
-
-                @*<div class="shoppingCartSum">
-                        <div class="col-md-8">
-                            Total:
+            <section class="receipt">
+                @if (HttpContext.Current.Session["Order"] != null)
+                {
+                    <header class="shoppingCartHeader">
+                        <div class="col-md-4">
+                            Products
                         </div>
                         <div class="col-md-3">
-                            398 €
+                            Price
                         </div>
-                    </div>*@
-               }
-               else
-               {
-                <header class="shoppingCartHeader">Your shoppingcart is empty.</header>
-               }
+                        <div class="pusher"></div>
+                    </header>
+                    int total;
+                    foreach (var item in Session["Order"] as List<OrderRowModel>)
+                    {
+                        @*<p>@item.ProductId</p>*@
+                        @Html.Action("ShoppingCartItemPartial", "ManageAccount", new { id = item.ProductId })
+                    }
+
+                    @*<div class="shoppingCartSum">
+                            <div class="col-md-8">
+                                Total:
+                            </div>
+                            <div class="col-md-3">
+                                398 €
+                            </div>
+                        </div>*@
+                }
+                else
+                {
+                    <header class="shoppingCartHeader">Your shoppingcart is empty.</header>
+                }
                 <div class="pusher"></div>
             </section>
             <br />
             @using (Html.BeginForm())
             {
-                @Html.LabelFor(m => m.Email, "Email:")
-                @Html.TextBoxFor(m => Model.Email, new { @class = "form-control" })
+                @Html.LabelFor(m => Model.Firstname, "Firstname:")
+                @Html.TextBoxFor(m => Model.Firstname, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Firstname)
                 <br />
-                @Html.LabelFor(m => Model.Password, "Password:")
-                @Html.TextBoxFor(m => Model.Password, new { @class = "form-control" })
+                @Html.LabelFor(m => Model.Lastname, "Lastname:")
+                @Html.TextBoxFor(m => Model.Lastname, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Lastname)
                 <br />
-                @Html.LabelFor(m => Model.Password, "Firstname:")
-                @Html.TextBoxFor(m => Model.Password, new { @class = "form-control" })
+                @Html.LabelFor(m => Model.Address, "Address:")
+                @Html.TextBoxFor(m => Model.Address, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Address)
                 <br />
-                @Html.LabelFor(m => Model.Password, "Lastname:")
-                @Html.TextBoxFor(m => Model.Password, new { @class = "form-control" })
+                @Html.LabelFor(m => Model.City, "City:")
+                @Html.TextBoxFor(m => Model.City, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.City)
                 <br />
-                @Html.LabelFor(m => Model.Password, "Address:")
-                @Html.TextBoxFor(m => Model.Password, new { @class = "form-control" })
+                @Html.LabelFor(m => Model.Zip, "Zip:")
+                @Html.TextBoxFor(m => Model.Zip, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Zip)
                 <br />
-                @Html.LabelFor(m => Model.Password, "City:")
-                @Html.TextBoxFor(m => Model.Password, new { @class = "form-control" })
+                @Html.LabelFor(m => Model.Phone, "Phone:")
+                @Html.TextBoxFor(m => Model.Phone, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Phone)
                 <br />
-                @Html.LabelFor(m => Model.Password, "Zip:")
-                @Html.TextBoxFor(m => Model.Password, new { @class = "form-control" })
-                <br />
+                @Html.HiddenFor(m=> Model.UserId)
+
                 <input type="submit" class="btn btn-primary" value="Order" />
             }
         </div>
@@ -95,5 +100,3 @@
         <div style="clear:both;"></div>
     </section>
 </article>
-
-

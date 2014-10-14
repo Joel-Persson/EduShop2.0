@@ -77,6 +77,21 @@ namespace EduShop_Unsecure.Models
             return userModel;
         }
 
+        public static OrderModel ConvertToOrderModel(UserModel user)
+        {
+            var orderModel = new OrderModel()
+            {
+                UserId = user.Id,
+                Firstname = user.Firstname,
+                Lastname = user.Lastname,
+                Address = user.Address,
+                Zip = user.Zip,
+                City = user.City,
+                Phone = user.Phone,
+            };
+            return orderModel;
+        }
+
         public static User ConvertToUser(UserModel userModel)
         {
             var user = new User()
