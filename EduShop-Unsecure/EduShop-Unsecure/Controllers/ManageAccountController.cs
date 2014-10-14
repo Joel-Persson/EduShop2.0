@@ -41,9 +41,10 @@ namespace EduShop_Unsecure.Controllers
 
         private void SetAuthenticationCookie(UserModel model)
         {
-            HttpCookie authentication = new HttpCookie("Auth");
+            HttpCookie authentication = new HttpCookie("Auth"){HttpOnly = true};
             authentication.Value = model.Email;
             Response.Cookies.Add(authentication);
+
         }
 
         public ActionResult LogOut()
