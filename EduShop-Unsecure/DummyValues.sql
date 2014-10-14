@@ -53,7 +53,7 @@ INSERT INTO [dbo].[ProductSet]
 		   'User Integrated Development EnvironmentDevelopment Platform SupporTesting Tools Microsoft Visual Studio 2010 Professional is the essential tool for individuals performing basic development tasks. It simplifies the creation, debugging, and deployment of applications on a variety of platforms including SharePoint and the Cloud. Visual Studio 2010 Professional comes with integrated support for test-driven development, as well as debugging tools that help ensure high-quality solutions. Academic C5E-00525 Complete Product DVD-ROM Microsoft Microsoft Corporation PC Software Visual Studio 2010 Professional Visual Studio 2010 Professional Edition Windows www.microsoft.com',
 		   'Microsoft'),
 
-		   ('Microsoft Office Home and Business 2013',
+		   ('Microsoft Office',
 		   '174',
 		   'Microsoft Office Home and Business 2013 ',
 		   '~/Images/Microsoft Office Home and Business 2013.jpg',
@@ -109,7 +109,7 @@ INSERT INTO [dbo].[ProductSet]
 		   'Malwarebytes Anti-Malware Premium combines powerful new technologies designed to seek out, destroy, and prevent malware. It detects and protects in an easy-to-use, straightforward, heavy-hitting but lightweight anti-malware application.',
 		   'Anti-Malware Software'),
 		   
-		   ('Focusrite Liquid Mix HD TDM Plugin for Pro',
+		   ('Focusrite Liquid Mix HD',
 			'437',
 			'Focusrite Liquid Mix HD TDM Plugin for Pro Tools HD',
 			'~/Images/Focusrite Liquid Mix HD TDM Plugin for Pro Tools HD.jpg',

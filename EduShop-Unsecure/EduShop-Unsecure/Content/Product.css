@@ -31,7 +31,7 @@ a.list-group-item:hover {
     color: #521984;
 }
 
-.col-sm-6.col-md-4 {
+/*.col-sm-6.col-md-4 {
     margin: 15px 0;
 }
 
@@ -40,15 +40,15 @@ a.list-group-item:hover {
     border-left: 1px dotted #ddd;
     margin: 20px 0px;
     padding: 20px;
-}
+}*/
 
-    .col-md-6:first-child {
+    /*.col-md-6:first-child {
         border-left: none;
-    }
+    }*/
 
-.col-md-12 {
+/*.col-md-12 {
     margin: 15px 0;
-}
+}*/
 
 .price {
     color: red;
@@ -56,9 +56,9 @@ a.list-group-item:hover {
     margin: auto;
 }
 
-.panel.panel-default {
+/*.panel.panel-default {
     margin-right: 1%;
-}
+}*/
 
 .thumbnail {
     border: none;
@@ -99,9 +99,9 @@ a.list-group-item:hover {
     font-weight: 800;
 }
 
-.minheight {
+/*.minheight {
     min-height: 200px;
-}
+}*/
 
 .thumbnail > a > img {
     margin-right: auto;
