@@ -19,10 +19,10 @@ namespace EduShop_Unsecure.Controllers
         public ActionResult BuyProduct(int id)
         {
             var order = Session["Order"] as List<OrderRowModel> ?? new List<OrderRowModel>();
-            order.Add(new OrderRowModel(){ProductId = id, Quantity = 1});
+            order.Add(new OrderRowModel() { ProductId = id, Quantity = 1 });
             Session["Order"] = order;
 
-            return RedirectToAction("ProductInfo", new{id});
+            return RedirectToAction("ProductInfo", new { id });
         }
 
         public ActionResult BuyProductSmall(int id)
@@ -57,6 +57,7 @@ namespace EduShop_Unsecure.Controllers
         }
 
 
+        [ValidateInput(false)]
         public ActionResult ProductInfo(int id)
         {
             var productModel = ProductModel.ConvertToProductModel(ProductModel.GetProduct(id));
@@ -70,6 +71,7 @@ namespace EduShop_Unsecure.Controllers
             return View(productinfoModel);
         }
 
+        [ValidateInput(false)]
         [HttpPost]
         public ActionResult ProductInfo(ProductInfoModel review)
         {
