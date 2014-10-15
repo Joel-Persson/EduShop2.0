@@ -17,31 +17,31 @@ namespace EduShop_Unsecure.Models
 
         public int Id { get; set; }
         [Required(ErrorMessage = "Can not be empty!")]
-        [EmailAddress(ErrorMessage = "Check email!")]
+        [EmailAddress(ErrorMessage = "Please check your email")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Can not be empty!")]
-        [StringLength(32, ErrorMessage = "Check your password!", MinimumLength = 6)]
+        [StringLength(32, ErrorMessage = "Check your password", MinimumLength = 6)]
         public string Password { get; set; }
 
         [Required(ErrorMessage = "Can not be empty!")]
-        [StringLength(40, ErrorMessage = "Check your firstname!", MinimumLength = 2)]
+        [StringLength(40, ErrorMessage = "Check your firstname", MinimumLength = 2)]
         public string Firstname { get; set; }
 
         [Required(ErrorMessage = "Can not be empty!")]
-        [StringLength(40, ErrorMessage = "Check your lastname!", MinimumLength = 2)]
+        [StringLength(40, ErrorMessage = "Check your lastname", MinimumLength = 2)]
         public string Lastname { get; set; }
 
         [Required(ErrorMessage = "Can not be empty!")]
-        [StringLength(70, ErrorMessage = "Check your address!", MinimumLength = 2)]
+        [StringLength(70, ErrorMessage = "Check your address", MinimumLength = 2)]
         public string Address { get; set; }
 
         [Required(ErrorMessage = "Can not be empty!")]
-        [DataType(DataType.PostalCode, ErrorMessage = "Check your zip!")]
+        [DataType(DataType.PostalCode, ErrorMessage = "Check your zip")]
         public string Zip { get; set; }
 
         [Required(ErrorMessage = "Can not be empty!")]
-        [StringLength(40, ErrorMessage = "Check your City!", MinimumLength = 2)]
+        [StringLength(40, ErrorMessage = "Check your City", MinimumLength = 2)]
         public string City { get; set; }
 
         [Required(ErrorMessage = "Can not be empty!")]
@@ -55,7 +55,7 @@ namespace EduShop_Unsecure.Models
         {
             return (
                 from c in context.UserSet
-                where c.Email == userModel.Email && c.Password == userModel.Password
+                where c.Email == userModel.Email
                 select c).FirstOrDefault();
         }
 
@@ -112,6 +112,7 @@ namespace EduShop_Unsecure.Models
 
         public static int AddUser(User user)
         {
+            user.Password = PasswordHash.CreateHash(user.Password);
             context.UserSet.AddOrUpdate(user);
             return context.SaveChanges();
         }
@@ -132,12 +133,12 @@ namespace EduShop_Unsecure.Models
             return true;
         }
 
-        public static UserModel GetUser(string email)
+        public static UserModel GetUser(string password)
         {
 
-           return ConvertToUserModel((from c in context.UserSet
-                                          where c.Email == email
-                                          select c).FirstOrDefault());
+            return ConvertToUserModel((from c in context.UserSet
+                                       where c.Password == password
+                                       select c).FirstOrDefault());
         }
     }
 }

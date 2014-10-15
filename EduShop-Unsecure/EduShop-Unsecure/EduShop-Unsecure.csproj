@@ -172,6 +172,7 @@
     <Compile Include="Models\CategoryModel.cs" />
     <Compile Include="Models\OrderModel.cs" />
     <Compile Include="Models\OrderRowModel.cs" />
+    <Compile Include="Models\PasswordHash.cs" />
     <Compile Include="Models\ProductInfoModel.cs" />
     <Compile Include="Models\ReviewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />

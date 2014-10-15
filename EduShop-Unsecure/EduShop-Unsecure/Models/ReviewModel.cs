@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using EduShop_Database;
@@ -14,10 +15,17 @@ namespace EduShop_Unsecure.Models
         private static readonly EduShop_Database.EduShopEntities context = new EduShopEntities();
 
         public int Id { get; set; }
+
         public int ProductId { get; set; }
+
+        [Required(ErrorMessage = "Please enter title")]
         public string Title { get; set; }
+
+        [Required(ErrorMessage = "Please enter review")]
         public string Content { get; set; }
+
         public double Rating { get; set; }
+
         public DateTime DateAdded { get; set; }
 
         public static ReviewModel ConvertToReviewModel(Review review)

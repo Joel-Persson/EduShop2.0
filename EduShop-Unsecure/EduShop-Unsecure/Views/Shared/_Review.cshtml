@@ -1,7 +1,6 @@
 ﻿@model EduShop_Unsecure.Models.ReviewModel
 @using (Html.BeginForm())
 {
-
     <div class="modal-body">
         <label>
             
@@ -12,13 +11,14 @@
         <br />
         @Html.LabelFor(m => Model.Title, "Title:")
         @Html.TextBoxFor(m => Model.Title, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => Model.Title)
         <br />
         @Html.LabelFor(m => Model.Content, "Review:")
         @Html.TextAreaFor(m => Model.Content, new { @class = "form-control minheight"})
+        @Html.ValidationMessageFor(m => Model.Content)
 
         @Html.HiddenFor(m => Model.DateAdded, new { Value = DateTime.Now })
         @Html.HiddenFor(m => Model.ProductId, new {Value = ViewBag.ProductId})
-        @*@Html.HiddenFor(m => Model.Rating, new {Value = "StarRating"})*@
     </div>
     <div class="modal-footer">
         <input type="submit" class="btn btn-primary" value="Submit Review"/>

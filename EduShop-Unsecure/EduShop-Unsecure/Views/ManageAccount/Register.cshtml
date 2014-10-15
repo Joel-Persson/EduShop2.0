@@ -57,7 +57,7 @@
                 @Html.TextBoxFor(m => Model.Phone, new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => Model.Phone)
                 <br />
-                @Html.HiddenFor(m => Model.IsAdmin, new { Value = 0 })
+                @Html.HiddenFor(m => Model.IsAdmin, new { Value = "false" })
                 <input type="submit" class="btn btn-primary" value="Register" />
             }
         </div>

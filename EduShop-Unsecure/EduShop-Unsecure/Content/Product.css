@@ -99,9 +99,9 @@ a.list-group-item:hover {
     font-weight: 800;
 }
 
-/*.minheight {
+.minheight {
     min-height: 200px;
-}*/
+}
 
 .thumbnail > a > img {
     margin-right: auto;

@@ -5,13 +5,14 @@ using System.Web;
 using System.Web.Mvc;
 using EduShop_Database;
 using EduShop_Unsecure.Models;
+using Microsoft.AspNet.Identity;
 
 namespace EduShop_Unsecure.Controllers
 {
     public class ManageAccountController : Controller
     {
         // GET: ManageAccount
-        [ChildActionOnly]
+        //[ChildActionOnly]
         public ActionResult Login()
         {
             return PartialView("_Login", new UserModel());
@@ -23,10 +24,13 @@ namespace EduShop_Unsecure.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (UserModel.CheckForUser(model) != null)
+                User user = UserModel.CheckForUser(model);
+
+                var validateUser = PasswordHash.ValidatePassword(model.Password, user.Password);
+                if (validateUser)
                 {
                     //SetOrderSession();
-                    SetAuthenticationCookie(model);
+                    SetAuthenticationCookie(user);
                     return RedirectToAction("Index", "Home");
                 }
                 return RedirectToAction("Index", "Home");
@@ -39,10 +43,10 @@ namespace EduShop_Unsecure.Controllers
             HttpContext.Session["Order"] = new List<OrderRowModel>();
         }
 
-        private void SetAuthenticationCookie(UserModel model)
+        private void SetAuthenticationCookie(User user)
         {
-            HttpCookie authentication = new HttpCookie("Auth"){HttpOnly = true};
-            authentication.Value = model.Email;
+            HttpCookie authentication = new HttpCookie("Auth") { HttpOnly = true };
+            authentication.Value = user.Password;
             Response.Cookies.Add(authentication);
 
         }
@@ -67,10 +71,9 @@ namespace EduShop_Unsecure.Controllers
         [HttpPost]
         public ActionResult Register(UserModel model)
         {
+            //GetErrorListFromModelState(ModelState);
             if (ModelState.IsValid)
             {
-
-
                 var user = new User();
 
                 user = UserModel.ConvertToUser(model);
@@ -86,6 +89,16 @@ namespace EduShop_Unsecure.Controllers
             }
             return View(model);
 
+        }
+
+        public static List<string> GetErrorListFromModelState (ModelStateDictionary modelState)
+        {
+            var query = from state in modelState.Values
+                        from error in state.Errors
+                        select error.ErrorMessage;
+
+            var errorList = query.ToList();
+            return errorList;
         }
 
         public ActionResult ShoppingCart()
