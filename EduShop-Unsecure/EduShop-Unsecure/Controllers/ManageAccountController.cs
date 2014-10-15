@@ -26,16 +26,17 @@ namespace EduShop_Unsecure.Controllers
             {
                 User user = UserModel.CheckForUser(model);
                 if (user != null)
-                {           
-                var validateUser = PasswordHash.ValidatePassword(model.Password, user.Password);
-                if (validateUser)
                 {
-                    //SetOrderSession();
-                    SetAuthenticationCookie(user);
-                    return RedirectToAction("Index", "Home");
+                    var validateUser = PasswordHash.ValidatePassword(model.Password, user.Password);
+                    if (validateUser)
+                    {
+                        //SetOrderSession();
+                        SetAuthenticationCookie(user);
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
-                }
-                return RedirectToAction("Index", "Home");//todo
+                ModelState.AddModelError("Error", "Invalid username or password");
+                return RedirectToAction("Index", "Home");
             }
             return RedirectToAction("Index", "Home", model);
         }
@@ -93,7 +94,7 @@ namespace EduShop_Unsecure.Controllers
 
         }
 
-        public static List<string> GetErrorListFromModelState (ModelStateDictionary modelState)
+        public static List<string> GetErrorListFromModelState(ModelStateDictionary modelState)
         {
             var query = from state in modelState.Values
                         from error in state.Errors

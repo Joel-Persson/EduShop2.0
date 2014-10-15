@@ -13,7 +13,6 @@ namespace EduShop_Unsecure.Models
     public class ProductModel
     {
         private static readonly EduShop_Database.EduShopEntities context = new EduShopEntities();
-
         public int Id { get; set; }
         public string Category { get; set; }
         public string Name { get; set; }
@@ -32,6 +31,7 @@ namespace EduShop_Unsecure.Models
 
         public static Product GetProduct(int id)
         {
+
             return (
                 from c in context.ProductSet
                 where c.Id == id
