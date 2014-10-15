@@ -25,7 +25,8 @@ namespace EduShop_Unsecure.Controllers
             if (ModelState.IsValid)
             {
                 User user = UserModel.CheckForUser(model);
-
+                if (user != null)
+                {           
                 var validateUser = PasswordHash.ValidatePassword(model.Password, user.Password);
                 if (validateUser)
                 {
@@ -33,7 +34,8 @@ namespace EduShop_Unsecure.Controllers
                     SetAuthenticationCookie(user);
                     return RedirectToAction("Index", "Home");
                 }
-                return RedirectToAction("Index", "Home");
+                }
+                return RedirectToAction("Index", "Home");//todo
             }
             return RedirectToAction("Index", "Home", model);
         }
