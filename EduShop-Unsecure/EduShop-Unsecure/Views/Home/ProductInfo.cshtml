@@ -36,13 +36,13 @@
                                value="@Model.ProductModel.AverageRating" data-readonly="true" data-show-clear="false" data-show-caption="false">
                         <p>@Model.ProductModel.ShortDescription</p>
                         <br />
-                        
+
                         @if (authenticated != null)
                         {
                             <a href=@Url.Action("BuyProduct","Home", new {id =  Model.ProductModel.Id})>
-                           
+
                                 @*@Html.ActionLink("Add to cart","BuyProduct", "Home", new { orderModel = Session["Order"], id = Model.ProductModel.Id })*@
-                                     
+
                                 @*@Session["Order"] = new*@
 
                                 <div class="btn-group btn-group-justified btn-group-lg">
@@ -59,15 +59,14 @@
                         }
                         else
                         {
+                                <div class="btn-group btn-group-justified btn-group-lg">
 
-                            <div class="btn-group btn-group-justified btn-group-lg">
-
-                                <h2 class="btn btn-danger btn-lg"> @Model.ProductModel.Price €</h2>
+                                    <h2 class="btn btn-danger btn-lg"> @Model.ProductModel.Price €</h2>
 
 
-                                <h2 class="btn btn-success btn-lg" role="button">Login to Purchase</h2>
+                                    <h2 class="btn btn-success btn-lg" role="button">Login to Purchase</h2>
 
-                            </div>
+                                </div>
                         }
 
                         <br />

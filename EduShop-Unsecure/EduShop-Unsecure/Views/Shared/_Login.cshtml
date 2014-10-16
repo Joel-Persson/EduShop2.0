@@ -1,6 +1,6 @@
 ﻿@model EduShop_Unsecure.Models.UserModel
 
-@using (@Html.BeginForm("Login", "ManageAccount", FormMethod.Post))
+@using (@Html.BeginForm("Login", "ManageAccount",new{url = HttpContext.Current.Request.Url.AbsoluteUri}, FormMethod.Post))
 {
     @Html.LabelFor(m => Model.Email, "Email:")
     @Html.TextBoxFor(m => Model.Email, new { @class = "form-control" })

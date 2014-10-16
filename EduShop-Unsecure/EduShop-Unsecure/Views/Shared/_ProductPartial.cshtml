@@ -17,7 +17,7 @@
                 <div class="btn-group btn-group-justified btn-group-lg">
                     @if (authenticated != null)
                     {
-                        <a href=@Url.Action("BuyProductSmall","Home", new {id =  Model.Id}) class="btn btn-primary btn-lg" role="button">@Model.Price <span class="glyphicon glyphicon-shopping-cart"></span></a>
+                        <a href=@Url.Action("BuyProductSmall","Home", new {id =  Model.Id, url=HttpContext.Current.Request.Url.AbsoluteUri}) class="btn btn-primary btn-lg" role="button">@Model.Price <span class="glyphicon glyphicon-shopping-cart"></span></a>
                     }
                     <a href="@Url.Action("ProductInfo","Home", new {Model.Id})" class=" btn btn-default btn-lg" role="button">Info</a>
                 </div>

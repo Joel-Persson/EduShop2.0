@@ -6,6 +6,8 @@
     </div>
     <div class="col-md-3">
         @Model.Price €
+        
+        @Html.ActionLink("Remove", "RemoveProduct", "Home", new { id = @Model.Id, url = HttpContext.Current.Request.Url.AbsoluteUri }, null)
     </div>
     <div class="pusher"></div>
 </div>

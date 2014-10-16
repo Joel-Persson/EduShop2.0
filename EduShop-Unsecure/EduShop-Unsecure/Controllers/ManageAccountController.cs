@@ -20,7 +20,7 @@ namespace EduShop_Unsecure.Controllers
 
 
         [HttpPost]
-        public ActionResult Login(UserModel model)
+        public ActionResult Login(UserModel model,string url)
         {
             if (ModelState.IsValid)
             {
@@ -32,13 +32,16 @@ namespace EduShop_Unsecure.Controllers
                     {
                         //SetOrderSession();
                         SetAuthenticationCookie(user);
-                        return RedirectToAction("Index", "Home");
+                        //return RedirectToAction("Index", "Home");
+                        return Redirect(url);
                     }
                 }
                 ModelState.AddModelError("Error", "Invalid username or password");
-                return RedirectToAction("Index", "Home");
+                return Redirect(url);
+                //return RedirectToAction("Index", "Home");
             }
-            return RedirectToAction("Index", "Home", model);
+            //return RedirectToAction("Index", "Home", model);
+            return Redirect(url);
         }
 
         private void SetOrderSession()
@@ -54,7 +57,7 @@ namespace EduShop_Unsecure.Controllers
 
         }
 
-        public ActionResult LogOut()
+        public ActionResult LogOut(string url)
         {
             if (Request.Cookies["Auth"] != null)
             {
@@ -63,7 +66,7 @@ namespace EduShop_Unsecure.Controllers
                 Response.Cookies.Add(authentication);
                 Session["Order"] = null;
             }
-            return RedirectToAction("Index", "Home");
+            return Redirect(url);
         }
 
         public ActionResult Register()

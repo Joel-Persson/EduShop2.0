@@ -25,13 +25,22 @@ namespace EduShop_Unsecure.Controllers
             return RedirectToAction("ProductInfo", new { id });
         }
 
-        public ActionResult BuyProductSmall(int id)
+        public ActionResult BuyProductSmall(int id, string url)
         {
             var order = Session["Order"] as List<OrderRowModel> ?? new List<OrderRowModel>();
             order.Add(new OrderRowModel() { ProductId = id, Quantity = 1 });
             Session["Order"] = order;
 
-            return RedirectToAction("Product");
+            return Redirect(url);
+        }
+
+        public ActionResult RemoveProduct(int id, string url)
+        {
+            var order = Session["Order"] as List<OrderRowModel> ?? new List<OrderRowModel>();
+            var orderRow = order.FirstOrDefault(o => o.ProductId ==id);
+            order.Remove(orderRow);
+            Session["Order"] = order;
+            return Redirect(url);
         }
 
         public ActionResult Product(string category, string search)
