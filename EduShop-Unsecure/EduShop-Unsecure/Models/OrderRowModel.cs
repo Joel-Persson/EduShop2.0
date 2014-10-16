@@ -9,7 +9,6 @@ namespace EduShop_Unsecure.Models
 {
     public class OrderRowModel
     {
-        private static readonly EduShopEntities context = new EduShopEntities();
         public int Id { get; set; }
         public int OrderId { get; set; }
         public int ProductId { get; set; }
@@ -42,8 +41,11 @@ namespace EduShop_Unsecure.Models
 
         public static int AddOrderRow(OrderRow orderRow)
         {
-            context.OrderRowSet.AddOrUpdate(orderRow);
-            return context.SaveChanges();
+            using (var _context = new EduShopEntities())
+            {
+                _context.OrderRowSet.AddOrUpdate(orderRow);
+                return _context.SaveChanges();
+            }
         }
 
     }

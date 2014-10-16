@@ -12,7 +12,6 @@ namespace EduShop_Unsecure.Models
 {
     public class ProductModel
     {
-        private static readonly EduShop_Database.EduShopEntities context = new EduShopEntities();
         public int Id { get; set; }
         public string Category { get; set; }
         public string Name { get; set; }
@@ -24,34 +23,45 @@ namespace EduShop_Unsecure.Models
 
         public static List<Product> GetProducts()
         {
+            using (var _context = new EduShopEntities())
+            {               
             return
-                (from c in context.ProductSet
+                (from c in _context.ProductSet
                  select c).ToList();
+            }
         }
 
         public static Product GetProduct(int id)
         {
-
-            return (
-                from c in context.ProductSet
-                where c.Id == id
-                select c).FirstOrDefault();
+            using (var _context = new EduShopEntities())
+            {
+                return (
+                    from c in _context.ProductSet
+                    where c.Id == id
+                    select c).FirstOrDefault();
+            }
         }
 
         public static List<Product> GetProductsOnCategory(string category)
         {
-            return (
-                from c in context.ProductSet
-                where c.Category == category
-                select c).ToList();
+            using (var _context = new EduShopEntities())
+            {
+                return (
+                    from c in _context.ProductSet
+                    where c.Category == category
+                    select c).ToList();
+            }
         }
 
         public static List<Product> GetProductsOnSearch(string search)
         {
-            return (
-                from c in context.ProductSet
-                where c.Category.Contains(search) || c.Name.Contains(search)
-                select c).ToList();
+            using (var _context = new EduShopEntities())
+            {
+                return (
+                    from c in _context.ProductSet
+                    where c.Category.Contains(search) || c.Name.Contains(search)
+                    select c).ToList();
+            }
         }
 
 
@@ -132,12 +142,16 @@ namespace EduShop_Unsecure.Models
 
         public static int AddOrUpdateProductRating(int id)
         {
-            int rating = ReviewModel.CalculateAverageRating(id);
-            Product product = GetProduct(id);
-            product.AverageRating = rating;
+            using (var _context = new EduShopEntities())
+            {
 
-            context.ProductSet.AddOrUpdate(product);
-            return context.SaveChanges();
+                int rating = ReviewModel.CalculateAverageRating(id);
+                Product product = GetProduct(id);
+                product.AverageRating = rating;
+
+                _context.ProductSet.AddOrUpdate(product);
+                return _context.SaveChanges();
+            }
 
         }
     }
