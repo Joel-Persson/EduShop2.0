@@ -1,4 +1,5 @@
-﻿@using EduShop_Unsecure.Models
+﻿@using System.ServiceModel.Security.Tokens
+@using EduShop_Unsecure.Models
 @using Microsoft.Ajax.Utilities
 <!DOCTYPE html>
 <html>
@@ -47,6 +48,18 @@
                         </li>
                         <li>@Html.ActionLink("Register", "Register", "ManageAccount")</li>
                     }
+                    <li>
+                        <a id="securityflag">
+                            @if (Settings.IsSecured)
+                            {
+                                <p id="secure">Secured</p>
+                            }
+                            else
+                            {
+                                <p id="unsecure">Unsecured</p>
+                            }
+                        </a>
+                    </li>
                 </ul>
 
                 @*@Html.Partial("_LoginPartial")*@

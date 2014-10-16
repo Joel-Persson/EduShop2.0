@@ -22,6 +22,7 @@ footer {
         -o-transition: all 500ms linear;
         -ms-transition: all 500ms linear;
         transition: all 500ms linear;
+       
 }
 
     .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
@@ -124,4 +125,21 @@ input[type="checkbox"] {
     .col-md-4:first-child {
         margin: 15px 0;
         border-left: none;
+    }
+
+    #securityflag {
+        border: none;
+    }
+        #securityflag:hover {
+            background-color: #f5f5f5;
+    }
+    #secure {
+        color: green;
+                padding: 0px;
+        margin: 0px;
+    }
+    #unsecure {
+        color: red;
+        padding: 0px;
+        margin: 0px;
     }

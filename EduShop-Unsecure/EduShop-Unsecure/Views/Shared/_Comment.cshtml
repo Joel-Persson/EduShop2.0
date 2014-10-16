@@ -1,4 +1,5 @@
 ﻿@using System.Text.RegularExpressions
+@using EduShop_Unsecure.Models
 @model List<EduShop_Unsecure.Models.ReviewModel>           
 <link href="~/Content/Comment.css" rel="stylesheet" />
 <link href="~/Content/star-rating.css" rel="stylesheet" />
@@ -15,7 +16,14 @@
                        value="@item.Rating" data-readonly="true" data-show-clear="false" data-show-caption="false">
             </div>
         }
+        @if (Settings.IsSecured)
+        {
+            <h2 class="panel-title">@item.Title</h2>
+        }
+        else
+        {
             <h2 class="panel-title">@Html.Raw(@item.Title)</h2>
+        }
             
 
         </div>

@@ -1,5 +1,7 @@
-﻿@using System.Data.Entity.Core.Objects
+﻿@using System.Data.Entity.Core.Metadata.Edm
+@using System.Data.Entity.Core.Objects
 @using EduShop_Unsecure.Models
+@using EduShop_Unsecure
 @model EduShop_Unsecure.Models.ProductInfoModel
 @{
     var authenticated = Request.Cookies["Auth"];
@@ -11,7 +13,6 @@
 <article class="contentcontainer">
     <div style="margin-top:20px;">
         <link href="~/Content/Product.css" rel="stylesheet" />
-
         <div>
             @Html.Action("Sidebar", "Home")
         </div>
@@ -113,8 +114,6 @@
                                 </div>
                             </div>
                         </div>
-
-
 
                     </div>
                     <div style="clear:both"></div>
