@@ -193,6 +193,7 @@
     <Content Include="Content\Sidebar.css" />
     <Content Include="Content\star-rating.css" />
     <Content Include="Images\Dummy_Item_Image%28245x245%29.png" />
+    <Content Include="Images\Edushop4.png" />
     <Content Include="Images\VisualStudio2010.jpg" />
     <Content Include="Images\Windows7.jpg" />
     <Content Include="Scripts\star-rating.js" />
