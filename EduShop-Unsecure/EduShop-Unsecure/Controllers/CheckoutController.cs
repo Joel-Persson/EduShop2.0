@@ -14,6 +14,17 @@ namespace EduShop_Unsecure.Controllers
         [HttpGet]
         public ActionResult Checkout()
         {
+            if (Session["Order"] != null)
+            {
+                var orderRows = Session["Order"] as List<OrderRowModel>;
+
+                double price =
+                    (from item in orderRows
+                     let productModel = ProductModel.ConvertToProductModel(ProductModel.GetProduct(item.ProductId))
+                     select (productModel.Price * item.Quantity)).Sum();
+
+                ViewBag.TotalPrice = price;
+            }
             var order = UserModel.ConvertToOrderModel(UserModel.GetUser(Request.Cookies["Auth"].Value));
             return View(order);
         }

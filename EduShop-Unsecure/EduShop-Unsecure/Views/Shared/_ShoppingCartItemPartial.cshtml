@@ -1,13 +1,21 @@
 ﻿@model EduShop_Unsecure.Models.ProductModel
 
 <div class="shoppingCartItem">
-    <div class="col-md-8">
-        @Model.Name x 1
+    <div class="col-md-5 cartwidth">
+        @Model.Name
     </div>
-    <div class="col-md-3">
-        @Model.Price €
+    <div class="col-md-3 cartwidth">
+        x @ViewBag.Quantity 
+    </div>
+    <div class="col-md-3 cartwidth">
+        @(Model.Price * ViewBag.Quantity) €
         
-        @Html.ActionLink("Remove", "RemoveProduct", "Home", new { id = @Model.Id, url = HttpContext.Current.Request.Url.AbsoluteUri }, null)
+    </div>
+    <div class="col-md-1 cartwidth">
+        <a href=@Url.Action("RemoveProduct", "Home", new { id = @Model.Id, url = HttpContext.Current.Request.Url.AbsoluteUri }, null)>
+            <span class="glyphicon glyphicon-remove-circle" style="color: red">
+            </span>
+        </a>
     </div>
     <div class="pusher"></div>
 </div>

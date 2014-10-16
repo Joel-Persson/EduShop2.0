@@ -11,29 +11,33 @@
                 @if (HttpContext.Current.Session["Order"] != null)
                 {
                     <header class="shoppingCartHeader">
-                        <div class="col-md-4">
+                        <div class="col-md-5 cartwidth">
                             Products
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3 cartwidth">
+                        </div>
+                        <div class="col-md-3 cartwidth">
                             Price
                         </div>
+                        <div class="col-md-1 cartwidth"></div>
+                   
                         <div class="pusher"></div>
                     </header>
                     int total;
                     foreach (var item in Session["Order"] as List<OrderRowModel>)
                     {
                         @*<p>@item.ProductId</p>*@
-                        @Html.Action("ShoppingCartItemPartial", "ManageAccount", new { id = item.ProductId })
+                        @Html.Action("ShoppingCartItemPartial", "ManageAccount", new { id = item.ProductId, quantity = item.Quantity})
                     }
 
-                    @*<div class="shoppingCartSum">
-                            <div class="col-md-8">
+                    <div class="shoppingCartSum">
+                            <div class="col-md-8 cartwidth">
                                 Total:
                             </div>
-                            <div class="col-md-3">
-                                398 €
+                            <div class="col-md-3 cartwidth">
+                                @ViewBag.TotalPrice €
                             </div>
-                        </div>*@
+                        </div>
                 }
                 else
                 {
@@ -78,7 +82,7 @@
 
                 <div class="circle">
                     <div class="circletext">
-                        <p>Please make sure that all information is correct before you register</p>
+                        <p>Please make sure that all information is correct before you order</p>
                     </div>
                 </div>
 

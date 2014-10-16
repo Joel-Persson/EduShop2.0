@@ -28,7 +28,20 @@ namespace EduShop_Unsecure.Controllers
         public ActionResult BuyProductSmall(int id, string url)
         {
             var order = Session["Order"] as List<OrderRowModel> ?? new List<OrderRowModel>();
+
+            var orderRow = order.FirstOrDefault(o => o.ProductId == id);
+
+            if (orderRow != null)
+            {
+                order.Remove(orderRow);
+                orderRow.Quantity ++;
+                order.Add(orderRow);
+                Session["Order"] = order;
+
+                return Redirect(url);
+            }
             order.Add(new OrderRowModel() { ProductId = id, Quantity = 1 });
+
             Session["Order"] = order;
 
             return Redirect(url);
@@ -38,6 +51,17 @@ namespace EduShop_Unsecure.Controllers
         {
             var order = Session["Order"] as List<OrderRowModel> ?? new List<OrderRowModel>();
             var orderRow = order.FirstOrDefault(o => o.ProductId ==id);
+
+            if (orderRow != null && orderRow.Quantity > 1)
+            {
+                order.Remove(orderRow);
+                orderRow.Quantity--;
+                order.Add(orderRow);
+                Session["Order"] = order;
+
+                return Redirect(url);
+            }
+
             order.Remove(orderRow);
             Session["Order"] = order;
             return Redirect(url);

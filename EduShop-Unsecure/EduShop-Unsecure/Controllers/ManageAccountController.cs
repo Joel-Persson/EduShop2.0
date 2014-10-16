@@ -20,7 +20,7 @@ namespace EduShop_Unsecure.Controllers
 
 
         [HttpPost]
-        public ActionResult Login(UserModel model,string url)
+        public ActionResult Login(UserModel model, string url)
         {
             if (ModelState.IsValid)
             {
@@ -109,6 +109,17 @@ namespace EduShop_Unsecure.Controllers
 
         public ActionResult ShoppingCart()
         {
+            if (Session["Order"] != null)
+            {
+                var orderRows = Session["Order"] as List<OrderRowModel>;
+
+                double price =
+                    (from item in orderRows
+                     let productModel = ProductModel.ConvertToProductModel(ProductModel.GetProduct(item.ProductId))
+                     select (productModel.Price * item.Quantity)).Sum();
+
+                ViewBag.TotalPrice = price;
+            }
             return PartialView("_ShoppingCart");
         }
 
@@ -119,10 +130,10 @@ namespace EduShop_Unsecure.Controllers
             return PartialView("_ShoppingCart");
         }
 
-        public ActionResult ShoppingCartItemPartial(int id)
+        public ActionResult ShoppingCartItemPartial(int id, long quantity)
         {
             var productModel = ProductModel.ConvertToProductModel(ProductModel.GetProduct(id));
-
+            ViewBag.Quantity = quantity;
             return PartialView("_ShoppingCartItemPartial", productModel);
         }
 

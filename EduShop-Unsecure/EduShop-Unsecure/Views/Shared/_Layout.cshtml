@@ -41,7 +41,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Login <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li>
-                                    @Html.Partial("_Login",new UserModel())
+                                    @Html.Partial("_Login", new UserModel())
                                 </li>
                             </ul>
                         </li>
@@ -58,9 +58,10 @@
                             {
                                 <span class="badge">
                                     @{
-                                        List<OrderRowModel> count = Session["Order"] as List<OrderRowModel>; 
+                                var list = Session["Order"] as List<OrderRowModel>;
+                                long count = list.Sum(item => item.Quantity);
                                     }
-                                    @count.Count
+                                    @count
                                 </span>
                             }
                             <span class="caret"></span>
@@ -72,6 +73,7 @@
                         </ul>
                     </li>
                 </ul>
+
                 @Html.Action("Search", "Home")
             </div>
         </div>

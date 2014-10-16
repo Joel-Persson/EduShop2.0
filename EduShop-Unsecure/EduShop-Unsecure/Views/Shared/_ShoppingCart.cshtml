@@ -4,29 +4,31 @@
 @if (HttpContext.Current.Session["Order"] != null)
 {
     <header class="shoppingCartHeader">
-        <div class="col-md-8">
+        <div class="col-md-5">
             Products
+        </div>
+        <div class="col-md-3">
+
         </div>
         <div class="col-md-3">
             Price
         </div>
         <div class="pusher"></div>
     </header>
-    int total;
     foreach (var item in Session["Order"] as List<OrderRowModel>)
     {
         @*<p>@item.ProductId</p>*@
-        @Html.Action("ShoppingCartItemPartial", "ManageAccount", new {id = item.ProductId})
+        @Html.Action("ShoppingCartItemPartial", "ManageAccount", new {id = item.ProductId, quantity = item.Quantity})
     }
 
-    @*<div class="shoppingCartSum">
-        <div class="col-md-8">
+    <div class="shoppingCartSum">
+        <div class="col-md-8 cartwidth">
             Total:
         </div>
-        <div class="col-md-3">
-            398 €
+        <div class="col-md-3 cartwidth">
+            @ViewBag.TotalPrice €
         </div>
-    </div>*@
+    </div>
     <section class="checkOut">
         <a class="btn btn-primary" href="@Url.Action("Checkout", "Checkout")">Go to checkout</a>
     </section>
