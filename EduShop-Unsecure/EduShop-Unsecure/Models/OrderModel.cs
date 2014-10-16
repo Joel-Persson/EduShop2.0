@@ -9,7 +9,6 @@ namespace EduShop_Unsecure.Models
 {
     public class OrderModel
     {
-        private static readonly EduShopEntities context = new EduShopEntities();
         public int Id { get; set; }
         public int UserId { get; set; }
         public string Firstname { get; set; }
@@ -53,16 +52,22 @@ namespace EduShop_Unsecure.Models
 
         public static int AddOrder(Order order)
         {
-            context.OrderSet.AddOrUpdate(order);
-            return context.SaveChanges();
+            using (var _context = new EduShopEntities())
+            {
+                _context.OrderSet.AddOrUpdate(order);
+                return _context.SaveChanges();
+            }
         }
 
         public static OrderModel GetLastOrder()
         {
+            using (var _context = new EduShopEntities())
+            {
 
-            return ConvertToOrderModel((from c in context.OrderSet
-                                        orderby c.Id descending 
-                                       select c).FirstOrDefault());
+                return ConvertToOrderModel((from c in _context.OrderSet
+                    orderby c.Id descending
+                    select c).FirstOrDefault());
+            }
         }
 
 

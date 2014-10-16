@@ -12,8 +12,6 @@ namespace EduShop_Unsecure.Models
     public class ReviewModel
     {
 
-        private static readonly EduShop_Database.EduShopEntities context = new EduShopEntities();
-
         public int Id { get; set; }
 
         public int ProductId { get; set; }
@@ -30,6 +28,7 @@ namespace EduShop_Unsecure.Models
 
         public static ReviewModel ConvertToReviewModel(Review review)
         {
+
             var reviewModel = new ReviewModel()
             {
                 Id = review.Id,
@@ -58,17 +57,23 @@ namespace EduShop_Unsecure.Models
 
         public static List<Review> GetReviews(int id)
         {
-            return (
-                from c in context.ReviewSet
-                where c.ProductId == id
-                orderby c.DateAdded descending
-                select c).ToList();
+            using (var _context = new EduShopEntities())
+            {
+                return (
+                    from c in _context.ReviewSet
+                    where c.ProductId == id
+                    orderby c.DateAdded descending
+                    select c).ToList();
+            }
         }
 
         public static int AddReview(Review review)
         {
-            context.ReviewSet.Add(review);
-            return context.SaveChanges();
+            using (var _context = new EduShopEntities())
+            {
+                _context.ReviewSet.Add(review);
+                return _context.SaveChanges();
+            }
         }
 
         public static List<ReviewModel> ReviewModelsToList(int id)

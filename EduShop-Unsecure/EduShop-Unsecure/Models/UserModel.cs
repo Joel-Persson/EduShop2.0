@@ -13,8 +13,6 @@ namespace EduShop_Unsecure.Models
     public class UserModel
     {
 
-        private static readonly EduShopEntities context = new EduShopEntities();
-
         public int Id { get; set; }
         [Required(ErrorMessage = "Can not be empty!")]
         [EmailAddress(ErrorMessage = "Please check your email")]
@@ -53,10 +51,14 @@ namespace EduShop_Unsecure.Models
 
         public static User CheckForUser(UserModel userModel)
         {
-            return (
-                from c in context.UserSet
-                where c.Email == userModel.Email
-                select c).FirstOrDefault();
+            using (var _context = new EduShopEntities())
+            {
+
+                return (
+                    from c in _context.UserSet
+                    where c.Email == userModel.Email
+                    select c).FirstOrDefault();
+            }
         }
 
         public static UserModel ConvertToUserModel(User user)
@@ -112,33 +114,44 @@ namespace EduShop_Unsecure.Models
 
         public static int AddUser(User user)
         {
-            user.Password = PasswordHash.CreateHash(user.Password);
-            context.UserSet.AddOrUpdate(user);
-            return context.SaveChanges();
+            using (var _context = new EduShopEntities())
+            {
+
+                user.Password = PasswordHash.CreateHash(user.Password);
+                _context.UserSet.AddOrUpdate(user);
+                return _context.SaveChanges();
+            }
         }
 
         public static bool CheckIfUSerEmailIsUnique(User user)
         {
-            var query = (from u in context.UserSet
-                         where u.Email == user.Email
-                         select u).Count();
-
-            if (query > 0)
+            using (var _context = new EduShopEntities())
             {
-                return false;
+
+                var query = (from u in _context.UserSet
+                    where u.Email == user.Email
+                    select u).Count();
+
+                if (query > 0)
+                {
+                    return false;
+                }
+
+                AddUser(user);
+
+                return true;
             }
-
-            AddUser(user);
-
-            return true;
         }
 
         public static UserModel GetUser(string password)
         {
+            using (var _context = new EduShopEntities())
+            {
 
-            return ConvertToUserModel((from c in context.UserSet
-                                       where c.Password == password
-                                       select c).FirstOrDefault());
+                return ConvertToUserModel((from c in _context.UserSet
+                    where c.Password == password
+                    select c).FirstOrDefault());
+            }
         }
     }
 }
