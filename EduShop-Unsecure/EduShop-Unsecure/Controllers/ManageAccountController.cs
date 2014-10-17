@@ -31,12 +31,11 @@ namespace EduShop_Unsecure.Controllers
                     if (validateUser)
                     {
                         //SetOrderSession();
-                        SetAuthenticationCookie(user);
+                        SetAuthenticationCookie(user.Password);
                         //return RedirectToAction("Index", "Home");
                         return Redirect(url);
                     }
                 }
-                ModelState.AddModelError("Error", "Invalid username or password");
                 return Redirect(url);
                 //return RedirectToAction("Index", "Home");
             }
@@ -49,10 +48,10 @@ namespace EduShop_Unsecure.Controllers
             HttpContext.Session["Order"] = new List<OrderRowModel>();
         }
 
-        private void SetAuthenticationCookie(User user)
+        private void SetAuthenticationCookie(string user)
         {
             HttpCookie authentication = new HttpCookie("Auth") { HttpOnly = true };
-            authentication.Value = user.Password;
+            authentication.Value = user;
             Response.Cookies.Add(authentication);
 
         }
@@ -146,9 +145,24 @@ namespace EduShop_Unsecure.Controllers
         [HttpPost]
         public ActionResult Edit(UserModel model)
         {
-            UserModel.AddUser(UserModel.ConvertToUser(model));
+            //GetErrorListFromModelState(ModelState);
+            if (ModelState.IsValid)
+            {
+                User user = UserModel.CheckForUser(model);
+                var validateUser = PasswordHash.ValidatePassword(model.Password, user.Password);
+                if (validateUser)
+                {
+                    UserModel.AddUser(UserModel.ConvertToUser(model));
 
-            return RedirectToAction("Index", "Home");
+                    var model2 = UserModel.GetUser(PasswordHash.CreateHash(model.NewPassword));
+                    SetAuthenticationCookie(model2.Password);
+
+
+                    return View(UserModel.GetUser(Request.Cookies["Auth"].Value));
+                }
+            }
+            return View(UserModel.GetUser(Request.Cookies["Auth"].Value));
+
         }
     }
 }

@@ -22,6 +22,9 @@ namespace EduShop_Unsecure.Models
         [StringLength(32, ErrorMessage = "Check your password", MinimumLength = 6)]
         public string Password { get; set; }
 
+        [StringLength(32, ErrorMessage = "Check your password", MinimumLength = 6)]
+        public string NewPassword { get; set; }
+
         [Required(ErrorMessage = "Can not be empty!")]
         [StringLength(40, ErrorMessage = "Check your firstname", MinimumLength = 2)]
         public string Firstname { get; set; }
@@ -96,11 +99,29 @@ namespace EduShop_Unsecure.Models
 
         public static User ConvertToUser(UserModel userModel)
         {
-            var user = new User()
+            if (userModel.NewPassword == null)
+            {
+                var user = new User()
+                {
+                    Id = userModel.Id,
+                    Email = userModel.Email,
+                    Password = userModel.Password,
+                    Firstname = userModel.Firstname,
+                    Lastname = userModel.Lastname,
+                    Address = userModel.Address,
+                    Zip = userModel.Zip,
+                    City = userModel.City,
+                    Phone = userModel.Phone,
+                    IsAdmin = userModel.IsAdmin
+                };
+                return user;
+            }
+
+            var user2 = new User()
             {
                 Id = userModel.Id,
                 Email = userModel.Email,
-                Password = userModel.Password,
+                Password = userModel.NewPassword,
                 Firstname = userModel.Firstname,
                 Lastname = userModel.Lastname,
                 Address = userModel.Address,
@@ -109,14 +130,14 @@ namespace EduShop_Unsecure.Models
                 Phone = userModel.Phone,
                 IsAdmin = userModel.IsAdmin
             };
-            return user;
+            return user2;
+        
         }
 
         public static int AddUser(User user)
         {
             using (var _context = new EduShopEntities())
             {
-
                 user.Password = PasswordHash.CreateHash(user.Password);
                 _context.UserSet.AddOrUpdate(user);
                 return _context.SaveChanges();
@@ -129,8 +150,8 @@ namespace EduShop_Unsecure.Models
             {
 
                 var query = (from u in _context.UserSet
-                    where u.Email == user.Email
-                    select u).Count();
+                             where u.Email == user.Email
+                             select u).Count();
 
                 if (query > 0)
                 {
@@ -149,8 +170,8 @@ namespace EduShop_Unsecure.Models
             {
 
                 return ConvertToUserModel((from c in _context.UserSet
-                    where c.Password == password
-                    select c).FirstOrDefault());
+                                           where c.Password == password
+                                           select c).FirstOrDefault());
             }
         }
     }

@@ -31,6 +31,10 @@
                 @Html.PasswordFor(m => Model.Password, new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => Model.Password)
                 <br />
+                @Html.LabelFor(m => Model.NewPassword, "New password:")
+                @Html.PasswordFor(m => Model.NewPassword, new{@class = "form-control"})
+                @Html.ValidationMessageFor(m => Model.Password)
+                <br/>
                 @Html.LabelFor(m => Model.Firstname, "Firstname:")
                 @Html.TextBoxFor(m => Model.Firstname, new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => Model.Firstname)
@@ -55,7 +59,7 @@
                 @Html.TextBoxFor(m => Model.Phone, new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => Model.Phone)
                 <br />
-                @Html.HiddenFor(m => Model.IsAdmin, new { Value = 0 })
+                @Html.HiddenFor(m => Model.IsAdmin, new { Value = "false" })
                 @Html.HiddenFor(m => Model.Id)
                 @Html.HiddenFor(m => Model.Email)
                 <input type="submit" class="btn btn-primary" value="Edit profile" />
