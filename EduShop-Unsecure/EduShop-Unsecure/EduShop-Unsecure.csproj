@@ -276,6 +276,7 @@
     <Content Include="Views\ManageAccount\Edit.cshtml" />
     <Content Include="Views\Shared\_ShoppingCartItemPartial.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\Checkout\Receipt.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

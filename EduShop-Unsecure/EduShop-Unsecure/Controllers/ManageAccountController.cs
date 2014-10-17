@@ -154,14 +154,14 @@ namespace EduShop_Unsecure.Controllers
                 {
                     UserModel.AddUser(UserModel.ConvertToUser(model));
 
-                    var model2 = UserModel.GetUser(PasswordHash.CreateHash(model.NewPassword));
+                    var model2 = UserModel.GetUserOnEmail(model.Email);
                     SetAuthenticationCookie(model2.Password);
 
 
-                    return View(UserModel.GetUser(Request.Cookies["Auth"].Value));
+                    return View(model);
                 }
             }
-            return View(UserModel.GetUser(Request.Cookies["Auth"].Value));
+            return View(model);
 
         }
     }

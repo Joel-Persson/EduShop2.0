@@ -174,5 +174,16 @@ namespace EduShop_Unsecure.Models
                                            select c).FirstOrDefault());
             }
         }
+
+        public static UserModel GetUserOnEmail(string email)
+        {
+            using (var _context = new EduShopEntities())
+            {
+
+                return ConvertToUserModel((from c in _context.UserSet
+                                           where c.Email == email
+                                           select c).FirstOrDefault());
+            }
+        }
     }
 }

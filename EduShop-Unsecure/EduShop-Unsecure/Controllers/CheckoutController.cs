@@ -39,8 +39,13 @@ namespace EduShop_Unsecure.Controllers
                 item.OrderId = order.Id;
                 OrderRowModel.AddOrderRow(OrderRowModel.ConvertToOrderRow(item));
             }
+            Session["order"] = null;
+            return RedirectToAction("Receipt");
+        }
 
-            return View(model);
+        public ActionResult Receipt()
+        {
+            return View();
         }
     }
 }
