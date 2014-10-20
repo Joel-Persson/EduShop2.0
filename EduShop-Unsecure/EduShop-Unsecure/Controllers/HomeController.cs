@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using EduShop_Database;
 using EduShop_Unsecure.Models;
 
 namespace EduShop_Unsecure.Controllers
@@ -14,15 +10,6 @@ namespace EduShop_Unsecure.Controllers
         public ActionResult Index()
         {
             return View();
-        }
-
-        public ActionResult BuyProduct(int id)
-        {
-            var order = Session["Order"] as List<OrderRowModel> ?? new List<OrderRowModel>();
-            order.Add(new OrderRowModel() { ProductId = id, Quantity = 1 });
-            Session["Order"] = order;
-
-            return RedirectToAction("ProductInfo", new { id });
         }
 
         public ActionResult BuyProductSmall(int id, string url)
@@ -75,6 +62,7 @@ namespace EduShop_Unsecure.Controllers
             }
             if (search != null)
             {
+                ViewBag.SearchTerm = search;
                 return View(ProductModel.ProductModelsToListSearch(search));
             }
             ViewBag.Category = category;
@@ -131,18 +119,7 @@ namespace EduShop_Unsecure.Controllers
         {
             return PartialView("_Comment", ReviewModel.ReviewModelsToList(id));
         }
-        [ChildActionOnly]
-        [HttpPost]
-        public ActionResult Comment(string comment)
-        {
-            return PartialView("_Comment");
-        }
 
-        public ActionResult Review(int id)
-        {
-            ViewBag.ProductId = id;
-            return PartialView("_Review");
-        }
         public ActionResult Search(SearchModel searchModel)
         {
 

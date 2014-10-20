@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Security.AccessControl;
-using System.Web;
 using EduShop_Database;
-using Microsoft.AspNet.Identity;
 
 namespace EduShop_Unsecure.Models
 {

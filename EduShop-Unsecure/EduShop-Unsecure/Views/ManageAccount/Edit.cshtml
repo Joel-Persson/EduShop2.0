@@ -23,10 +23,6 @@
             <br />
             @using (Html.BeginForm())
             {
-                @*@Html.LabelFor(m => m.Email, "Email:")
-                @Html.TextBoxFor(m => Model.Email, new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => Model.Email)
-                <br />*@
                 @Html.LabelFor(m => Model.Password, "Password:")
                 @Html.PasswordFor(m => Model.Password, new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => Model.Password)

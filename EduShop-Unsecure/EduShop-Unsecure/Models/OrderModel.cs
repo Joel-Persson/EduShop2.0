@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.Migrations;
+﻿using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Web;
 using EduShop_Database;
 
 namespace EduShop_Unsecure.Models
@@ -63,16 +60,10 @@ namespace EduShop_Unsecure.Models
         {
             using (var _context = new EduShopEntities())
             {
-
                 return ConvertToOrderModel((from c in _context.OrderSet
                     orderby c.Id descending
                     select c).FirstOrDefault());
             }
         }
-
-
     }
-
-
-
 }

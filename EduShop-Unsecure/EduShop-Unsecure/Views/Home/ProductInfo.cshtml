@@ -1,15 +1,13 @@
-﻿@using System.Data.Entity.Core.Metadata.Edm
-@using System.Data.Entity.Core.Objects
-@using EduShop_Unsecure.Models
-@using EduShop_Unsecure
-@model EduShop_Unsecure.Models.ProductInfoModel
+﻿@model EduShop_Unsecure.Models.ProductInfoModel
+@{
+    ViewBag.Title = "Product Information";
+}
 @{
     var authenticated = Request.Cookies["Auth"];
 }
 <link href="~/Content/Product.css" rel="stylesheet" />
 <link href="~/Content/star-rating.css" rel="stylesheet" />
 
-<h2>ProductInfo</h2>
 <article class="contentcontainer">
     <div style="margin-top:20px;">
         <link href="~/Content/Product.css" rel="stylesheet" />
@@ -40,16 +38,11 @@
 
                         @if (authenticated != null)
                         {
-                            <a href=@Url.Action("BuyProduct","Home", new {id =  Model.ProductModel.Id})>
-
-                                @*@Html.ActionLink("Add to cart","BuyProduct", "Home", new { orderModel = Session["Order"], id = Model.ProductModel.Id })*@
-
-                                @*@Session["Order"] = new*@
+                            <a href=@Url.Action("BuyProductSmall","Home", new {id =  Model.ProductModel.Id, url=HttpContext.Current.Request.Url.AbsoluteUri})>
 
                                 <div class="btn-group btn-group-justified btn-group-lg">
 
                                     <h2 class="btn btn-danger btn-lg"> @Model.ProductModel.Price €</h2>
-
 
                                     <h2 class="btn btn-primary btn-lg" role="button">
                                         Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span>
@@ -75,7 +68,6 @@
 
                         <a data-toggle="modal" data-target="#myModal" class="review-link">Write a Review</a>
 
-                        <!-- Modal -->
                         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -83,7 +75,6 @@
                                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                                         <h4 class="modal-title" id="myModalLabel">Review</h4>
                                     </div>
-                                    @*This is where review Starts*@
                                     @using (Html.BeginForm())
                                     {
                                         <div class="modal-body">
@@ -102,15 +93,12 @@
 
                                             @Html.HiddenFor(m => Model.ReviewModel.DateAdded, new { Value = DateTime.Now })
                                             @Html.HiddenFor(m => Model.ReviewModel.ProductId, new { Value = Model.ProductModel.Id })
-                                            @*@Html.HiddenFor(m => Model.Rating, new {Value = "StarRating"})*@
                                         </div>
                                         <div class="modal-footer">
                                             <input type="submit" class="btn btn-primary" value="Submit Review" />
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                         </div>
                                     }
-
-                                    @*@Html.Action("Review","Home")*@
                                 </div>
                             </div>
                         </div>

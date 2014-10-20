@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Web;
 using EduShop_Database;
-using Microsoft.Ajax.Utilities;
 
 
 namespace EduShop_Unsecure.Models
@@ -100,13 +98,7 @@ namespace EduShop_Unsecure.Models
         {
             List<Review> reviews = new List<Review>();
             reviews = GetReviews(id);
-            double value = 0;
-
-            foreach (var item in reviews)
-            {
-                value += item.Rating;
-            }
-
+            double value = reviews.Sum(item => item.Rating);
             return RoundUpStarsToEven(value / reviews.Count);
         }
     }

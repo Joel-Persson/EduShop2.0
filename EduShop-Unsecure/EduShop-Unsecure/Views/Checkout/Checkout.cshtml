@@ -1,5 +1,5 @@
 ﻿@using EduShop_Unsecure.Models
-@model EduShop_Unsecure.Models.OrderModel
+@model OrderModel
 <link href="~/Content/ShoppingCart.css" rel="stylesheet" />
 <link href="~/Content/Forms.css" rel="stylesheet" />
 
@@ -23,10 +23,8 @@
                    
                         <div class="pusher"></div>
                     </header>
-                    int total;
                     foreach (var item in Session["Order"] as List<OrderRowModel>)
                     {
-                        @*<p>@item.ProductId</p>*@
                         @Html.Action("ShoppingCartItemPartial", "ManageAccount", new { id = item.ProductId, quantity = item.Quantity})
                     }
 

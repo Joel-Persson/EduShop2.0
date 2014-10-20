@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Security.AccessControl;
-using System.Web;
 using EduShop_Database;
-using EduShop_Unsecure.Models;
 
 
 namespace EduShop_Unsecure.Models
@@ -79,23 +75,6 @@ namespace EduShop_Unsecure.Models
                 ShortDescription = product.ShortDescription
             };
             return productModel;
-        }
-
-        public static Product ConvertToProduct(ProductModel productModel)
-        {
-
-            var product = new Product()
-            {
-                Id = productModel.Id,
-                Description = productModel.Description,
-                AverageRating = productModel.AverageRating,
-                Category = productModel.Category,
-                ImgUrl = productModel.ImgUrl,
-                Name = productModel.Name,
-                Price = productModel.Price,
-                ShortDescription = productModel.ShortDescription,
-            };
-            return product;
         }
 
         public static List<ProductModel> ProductModelsToList()

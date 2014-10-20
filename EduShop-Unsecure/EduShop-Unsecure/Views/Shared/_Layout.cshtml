@@ -1,6 +1,4 @@
-﻿@using System.ServiceModel.Security.Tokens
-@using EduShop_Unsecure.Models
-@using Microsoft.Ajax.Utilities
+﻿@using EduShop_Unsecure.Models
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,20 +60,22 @@
                     </li>
                 </ul>
 
-                @*@Html.Partial("_LoginPartial")*@
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart
                             @if (HttpContext.Current.Session["Order"] != null)
                             {
-                                <span class="badge">
-                                    @{
+                                {
                                 var list = Session["Order"] as List<OrderRowModel>;
                                 long count = list.Sum(item => item.Quantity);
-                                    }
-                                    @count
-                                </span>
+                                 if(count > 0)
+                                 { 
+                                     <span class="badge">
+                                         @count
+                                     </span>
+                                 }
+                                }
                             }
                             <span class="caret"></span>
                         </a>
@@ -100,7 +100,6 @@
         </footer>
     </div>
 
-    @*<script src="~/Scripts/jquery.validate.js"></script>*@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
     <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>

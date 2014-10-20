@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.Migrations;
-using System.Linq;
-using System.Web;
+﻿using System.Data.Entity.Migrations;
 using EduShop_Database;
 
 namespace EduShop_Unsecure.Models
@@ -24,18 +20,6 @@ namespace EduShop_Unsecure.Models
                 Quantity = orderRowModel.Quantity
             };
             return orderRow;
-        }
-
-        public static OrderRowModel ConvertToOrderRowModel(OrderRow orderRow)
-        {
-            var orderRowModel = new OrderRowModel()
-            {
-                Id = orderRow.Id,
-                OrderId = orderRow.OrderId,
-                ProductId = orderRow.ProductId,
-                Quantity = orderRow.Quantity
-            };
-            return orderRowModel;
         }
 
 

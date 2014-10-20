@@ -5,17 +5,20 @@ using System.Web;
 using System.Web.Mvc;
 using EduShop_Database;
 using EduShop_Unsecure.Models;
-using Microsoft.AspNet.Identity;
 
 namespace EduShop_Unsecure.Controllers
 {
     public class ManageAccountController : Controller
     {
         // GET: ManageAccount
-        //[ChildActionOnly]
+        [ChildActionOnly]
         public ActionResult Login()
         {
-            return PartialView("_Login", new UserModel());
+            if (Request.Cookies["Auth"] != null)
+            {
+                return PartialView("_Login", new UserModel());
+            }
+            return RedirectToAction("Index", "Home");
         }
 
 
@@ -30,22 +33,13 @@ namespace EduShop_Unsecure.Controllers
                     var validateUser = PasswordHash.ValidatePassword(model.Password, user.Password);
                     if (validateUser)
                     {
-                        //SetOrderSession();
                         SetAuthenticationCookie(user.Password);
-                        //return RedirectToAction("Index", "Home");
                         return Redirect(url);
                     }
                 }
                 return Redirect(url);
-                //return RedirectToAction("Index", "Home");
             }
-            //return RedirectToAction("Index", "Home", model);
             return Redirect(url);
-        }
-
-        private void SetOrderSession()
-        {
-            HttpContext.Session["Order"] = new List<OrderRowModel>();
         }
 
         private void SetAuthenticationCookie(string user)
@@ -70,7 +64,11 @@ namespace EduShop_Unsecure.Controllers
 
         public ActionResult Register()
         {
-            return View();
+            if (Request.Cookies["Auth"] == null)
+            {
+                return View();
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
@@ -139,7 +137,11 @@ namespace EduShop_Unsecure.Controllers
 
         public ActionResult Edit()
         {
-            return View(UserModel.GetUser(Request.Cookies["Auth"].Value));
+            if (Request.Cookies["Auth"] != null)
+            {
+                return View(UserModel.GetUser(Request.Cookies["Auth"].Value));
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
@@ -156,7 +158,6 @@ namespace EduShop_Unsecure.Controllers
 
                     var model2 = UserModel.GetUserOnEmail(model.Email);
                     SetAuthenticationCookie(model2.Password);
-
 
                     return View(model);
                 }

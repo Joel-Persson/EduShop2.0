@@ -1,6 +1,6 @@
 ﻿@model List<EduShop_Unsecure.Models.ProductModel>
 @{
-    ViewBag.Title = "ProductModel";
+    ViewBag.Title = "Products";
 }
 <article class="contentcontainer">
     <div style="margin-top:20px;">
@@ -17,9 +17,13 @@
                 <div class="panel-heading">
 
                     <h4 class="panel-title"><span class="glyphicon glyphicon-th"></span>
-                        @if (string.IsNullOrEmpty(ViewBag.Category))
+                        @if (string.IsNullOrEmpty(ViewBag.Category) && string.IsNullOrEmpty(ViewBag.SearchTerm))
                         {
                             <span>Products</span>
+                        }
+                        else if (@ViewBag.SearchTerm != null)
+                        {
+                            <span>Results for "@ViewBag.SearchTerm"</span>
                         }
                         else
                         {
