@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using EduShop_Unsecure.Models;
 
 namespace EduShop_Unsecure.Controllers
@@ -9,10 +11,11 @@ namespace EduShop_Unsecure.Controllers
     {
         // GET: Checkout
         [HttpGet]
+        [Authorize]
         public ActionResult Checkout()
         {
-            if (Request.Cookies["Auth"] != null)
-            {
+            //if (Request.Cookies["Auth"] != null)
+            //{
                 if (Session["Order"] != null)
                 {
                     var list = Session["Order"] as List<OrderRowModel>;
@@ -28,14 +31,23 @@ namespace EduShop_Unsecure.Controllers
                                 select (productModel.Price*item.Quantity)).Sum();
 
                         ViewBag.TotalPrice = price;
-                    
-                    var order = UserModel.ConvertToOrderModel(UserModel.GetUser(Request.Cookies["Auth"].Value));
+
+                        var ticket = GetAuthCookieValue();
+
+                        var order = UserModel.ConvertToOrderModel(UserModel.GetUser(ticket.Name));
                     return View(order);
                     }
                     return RedirectToAction("Index", "Home");
                 }
-            }
+            //}
             return RedirectToAction("Index", "Home");
+        }
+
+        private FormsAuthenticationTicket GetAuthCookieValue()
+        {
+            HttpCookie authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
+            FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
+            return ticket;
         }
 
         [HttpPost]

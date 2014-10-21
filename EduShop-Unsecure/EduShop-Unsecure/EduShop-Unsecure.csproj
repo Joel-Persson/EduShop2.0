@@ -164,6 +164,7 @@
     <Compile Include="App_Start\Startup.Auth.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -266,6 +267,8 @@
     <Content Include="Views\Shared\_ShoppingCartItemPartial.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Views\Checkout\Receipt.cshtml" />
+    <Content Include="Views\Admin\UserListing.cshtml" />
+    <Content Include="Views\ManageAccount\LoginRedirect.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

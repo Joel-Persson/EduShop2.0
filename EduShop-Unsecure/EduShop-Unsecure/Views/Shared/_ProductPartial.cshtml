@@ -1,6 +1,6 @@
 ﻿@model EduShop_Unsecure.Models.ProductModel
 @{
-    var authenticated = Request.Cookies["Auth"];
+    var authenticated = HttpContext.Current.Request.Cookies.Get(FormsAuthentication.FormsCookieName);
 }
 <div class="col-sm-6 col-md-4">
     <div class="thumbnail">

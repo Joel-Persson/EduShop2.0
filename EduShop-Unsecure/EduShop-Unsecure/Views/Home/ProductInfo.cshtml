@@ -3,7 +3,8 @@
     ViewBag.Title = "Product Information";
 }
 @{
-    var authenticated = Request.Cookies["Auth"];
+    var authenticated = HttpContext.Current.Request.Cookies.Get(FormsAuthentication.FormsCookieName);
+        //Request.Cookies["Auth"];
 }
 <link href="~/Content/Product.css" rel="stylesheet" />
 <link href="~/Content/star-rating.css" rel="stylesheet" />

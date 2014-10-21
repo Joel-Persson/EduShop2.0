@@ -11,13 +11,14 @@
 </head>
 <body>
     @{
-        var authenticated = Request.Cookies["Auth"];
+        var authenticated = HttpContext.Current.Request.Cookies.Get(FormsAuthentication.FormsCookieName);
+        var admin = Request.Cookies["Admin"];
     }
     <div class="navbar navbar-inverse navbar-fixed-top">
         <a href="@Url.Action("Index","Home")">
             <img src="~/Images/Edushop4.png" style="max-height:40px; margin:5px; float:left; margin-left:40px;" />
         </a>
-        <div class="container" style="padding:0px;">
+        <div class="container" style="padding:0;">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
@@ -46,6 +47,16 @@
                         </li>
                         <li>@Html.ActionLink("Register", "Register", "ManageAccount")</li>
                     }
+                    @if (admin != null)
+                    {
+
+                        if (admin.Value.Equals("true"))
+                        {
+                            <li>
+                                @Html.ActionLink("List users", "UserListing", "Admin")
+                            </li>
+                        }
+                    }
                     <li>
                         <a id="securityflag">
                             @if (Settings.IsSecured)
@@ -61,20 +72,24 @@
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        @Html.Action("Search", "Home")
+                    </li>
+
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart
                             @if (HttpContext.Current.Session["Order"] != null)
                             {
                                 {
-                                var list = Session["Order"] as List<OrderRowModel>;
-                                long count = list.Sum(item => item.Quantity);
-                                 if(count > 0)
-                                 { 
-                                     <span class="badge">
-                                         @count
-                                     </span>
-                                 }
+                                    var list = Session["Order"] as List<OrderRowModel>;
+                                    long count = list.Sum(item => item.Quantity);
+                                    if (count > 0)
+                                    {
+                                        <span class="badge">
+                                            @count
+                                        </span>
+                                    }
                                 }
                             }
                             <span class="caret"></span>
@@ -85,9 +100,9 @@
                             </li>
                         </ul>
                     </li>
+
                 </ul>
 
-                @Html.Action("Search", "Home")
             </div>
         </div>
     </div>
