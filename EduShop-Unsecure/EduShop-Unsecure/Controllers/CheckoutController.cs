@@ -51,6 +51,7 @@ namespace EduShop_Unsecure.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult Checkout(OrderModel model)
         {
             if(Session["order"] != null)
@@ -68,6 +69,7 @@ namespace EduShop_Unsecure.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [Authorize]
         public ActionResult Receipt()
         {
             return View();

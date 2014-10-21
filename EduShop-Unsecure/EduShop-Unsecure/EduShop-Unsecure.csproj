@@ -220,6 +220,9 @@
     <Content Include="Images\windows8box.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="..\EduShop-Database\App.config">
+      <Link>App.config</Link>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Custom.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

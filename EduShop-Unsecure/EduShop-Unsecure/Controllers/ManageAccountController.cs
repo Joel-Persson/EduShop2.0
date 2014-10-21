@@ -74,7 +74,7 @@ namespace EduShop_Unsecure.Controllers
             //Response.Cookies.Add(authentication);
         }
 
-
+        [Authorize]
         public ActionResult LogOut(string url)
         {
             //if (Request.Cookies["Auth"] != null || Request.Cookies["Admin"] != null)

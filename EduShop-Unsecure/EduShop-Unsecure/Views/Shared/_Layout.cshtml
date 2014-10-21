@@ -15,9 +15,12 @@
         var admin = Request.Cookies["Admin"];
     }
     <div class="navbar navbar-inverse navbar-fixed-top">
-        <a href="@Url.Action("Index","Home")">
-            <img src="~/Images/Edushop4.png" style="max-height:40px; margin:5px; float:left; margin-left:40px;" />
-        </a>
+        @if (admin == null || admin.Value.Equals("False"))
+        {
+            <a href="@Url.Action("Index","Home")">
+                <img src="~/Images/Edushop4.png" style="max-height:40px; margin:5px; float:left; margin-left:40px;" />
+            </a>
+        }
         <div class="container" style="padding:0;">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -33,7 +36,10 @@
                     @if (authenticated != null)
                     {
                         <li><a href="@Url.Action("LogOut", "ManageAccount",new{url=HttpContext.Current.Request.Url.AbsoluteUri})">Logout</a></li>
-                        <li>@Html.ActionLink("Edit Profile", "Edit", "ManageAccount")</li>
+                        if (admin == null || admin.Value.Equals("False"))
+                        {
+                            <li>@Html.ActionLink("Edit Profile", "Edit", "ManageAccount")</li>
+                        }
                     }
                     else
                     {
@@ -49,7 +55,6 @@
                     }
                     @if (admin != null)
                     {
-
                         if (admin.Value.Equals("true"))
                         {
                             <li>
@@ -72,35 +77,37 @@
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        @Html.Action("Search", "Home")
-                    </li>
+                    @if (admin == null || admin.Value.Equals("False"))
+                    {
+                        <li>
+                            @Html.Action("Search", "Home")
+                        </li>
 
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart
-                            @if (HttpContext.Current.Session["Order"] != null)
-                            {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart
+                                @if (HttpContext.Current.Session["Order"] != null)
                                 {
-                                    var list = Session["Order"] as List<OrderRowModel>;
-                                    long count = list.Sum(item => item.Quantity);
-                                    if (count > 0)
                                     {
-                                        <span class="badge">
-                                            @count
-                                        </span>
+                                        var list = Session["Order"] as List<OrderRowModel>;
+                                        long count = list.Sum(item => item.Quantity);
+                                        if (count > 0)
+                                        {
+                                            <span class="badge">
+                                                @count
+                                            </span>
+                                        }
                                     }
                                 }
-                            }
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li>
-                                @Html.Action("ShoppingCart", "ManageAccount")
-                            </li>
-                        </ul>
-                    </li>
-
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    @Html.Action("ShoppingCart", "ManageAccount")
+                                </li>
+                            </ul>
+                        </li>
+                    }
                 </ul>
 
             </div>

@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
+using System.Web.Configuration;
 using EduShop_Database;
 
 
@@ -71,6 +74,22 @@ namespace EduShop_Unsecure.Models
             {
                 _context.ReviewSet.Add(review);
                 return _context.SaveChanges();
+            }
+        }
+        public static void AddReviewToDB(Review review)
+        {
+            string conString = ConfigurationManager.ConnectionStrings["DatabaseModel"].ConnectionString;
+            using (SqlConnection connection = new SqlConnection(conString))
+            {
+                connection.Open();
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText =
+                        @"INSERT INTO [dbo].[ReviewSet]([Title],[Content],[Rating],[DateAdded],[ProductId]) VALUES('{0}',{1}',{2},'{3}',{4})";
+                    command.CommandText = string.Format(command.CommandText, review.Title, review.Content, review.Rating, review.DateAdded, review.ProductId);
+                    command.ExecuteNonQuery();
+                }
+                connection.Close();
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using EduShop_Database;
@@ -126,7 +127,7 @@ namespace EduShop_Unsecure.Models
                 IsAdmin = userModel.IsAdmin
             };
             return user2;
-        
+
         }
 
         public static int AddUser(User user)
@@ -167,6 +168,23 @@ namespace EduShop_Unsecure.Models
                 return ConvertToUserModel((from c in _context.UserSet
                                            where c.Password == password
                                            select c).FirstOrDefault());
+            }
+        }
+
+        public static List<UserModel> GetAllUsers()
+        {
+            using (var _context = new EduShopEntities())
+            {
+                var userModelList = new List<UserModel>();
+                List<User> userList = (from c in _context.UserSet
+                 select c).ToList();
+
+                foreach (var item in userList)
+                {
+                    userModelList.Add(ConvertToUserModel(item));
+                }
+
+                return userModelList;
             }
         }
 

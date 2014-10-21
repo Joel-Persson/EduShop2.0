@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using EduShop_Database;
 using EduShop_Unsecure.Models;
 
 namespace EduShop_Unsecure.Controllers
 {
     public class HomeController : Controller
     {
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View();
@@ -54,6 +56,7 @@ namespace EduShop_Unsecure.Controllers
             return Redirect(url);
         }
 
+        [AllowAnonymous]
         public ActionResult Product(string category, string search)
         {
             if (category == null && search == null)
@@ -70,6 +73,7 @@ namespace EduShop_Unsecure.Controllers
 
         }
 
+        [AllowAnonymous]
         public ActionResult ProductPartial(int id)
         {
             var productModel = ProductModel.ConvertToProductModel(ProductModel.GetProduct(id));
@@ -78,6 +82,7 @@ namespace EduShop_Unsecure.Controllers
         }
 
 
+        [AllowAnonymous]
         [ValidateInput(false)]
         public ActionResult ProductInfo(int id)
         {
@@ -92,21 +97,25 @@ namespace EduShop_Unsecure.Controllers
             return View(productinfoModel);
         }
 
+        [AllowAnonymous]
         [ValidateInput(false)]
         [HttpPost]
         public ActionResult ProductInfo(ProductInfoModel review)
         {
             ReviewModel.AddReview(ReviewModel.ConvertToReview(review.ReviewModel));
+            //ReviewModel.AddReviewToDB(ReviewModel.ConvertToReview(review.ReviewModel));
             ProductModel.AddOrUpdateProductRating(review.ReviewModel.ProductId);
             return RedirectToAction("ProductInfo", "Home", new { id = review.ReviewModel.ProductId });
         }
 
+        [AllowAnonymous]
         [ChildActionOnly]
         public ActionResult Sidebar()
         {
             return PartialView("_Sidebar");
         }
 
+        [AllowAnonymous]
         [ChildActionOnly]
         [HttpPost]
         public ActionResult Sidebar(string category)
@@ -114,12 +123,13 @@ namespace EduShop_Unsecure.Controllers
             return PartialView("_Sidebar");
         }
 
-
+        [AllowAnonymous]
         public ActionResult Comment(int id)
         {
             return PartialView("_Comment", ReviewModel.ReviewModelsToList(id));
         }
 
+        [AllowAnonymous]
         public ActionResult Search(SearchModel searchModel)
         {
 
