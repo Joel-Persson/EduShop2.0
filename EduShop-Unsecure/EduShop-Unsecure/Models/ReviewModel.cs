@@ -78,18 +78,25 @@ namespace EduShop_Unsecure.Models
         }
         public static void AddReviewToDB(Review review)
         {
-            string conString = ConfigurationManager.ConnectionStrings["DatabaseModel"].ConnectionString;
-            using (SqlConnection connection = new SqlConnection(conString))
+            try
             {
-                connection.Open();
-                using (SqlCommand command = connection.CreateCommand())
+                string conString = ConfigurationManager.ConnectionStrings["DatabaseModel"].ConnectionString;
+                using (SqlConnection connection = new SqlConnection(conString))
                 {
-                    command.CommandText =
-                        @"INSERT INTO [dbo].[ReviewSet]([Title],[Content],[Rating],[DateAdded],[ProductId]) VALUES('{0}',{1}',{2},'{3}',{4})";
-                    command.CommandText = string.Format(command.CommandText, review.Title, review.Content, review.Rating, review.DateAdded, review.ProductId);
-                    command.ExecuteNonQuery();
+                    connection.Open();
+                    using (SqlCommand command = connection.CreateCommand())
+                    {
+                        command.CommandText =
+                            @"INSERT INTO [dbo].[ReviewSet]([Title],[Content],[Rating],[DateAdded],[ProductId]) VALUES('{0}','{1}',{2},'{3}',{4})";
+                        command.CommandText = string.Format(command.CommandText, review.Title, review.Content, review.Rating, review.DateAdded, review.ProductId);
+                        command.ExecuteNonQuery();
+                    }
+                    connection.Close();
                 }
-                connection.Close();
+            }
+            catch (Exception e)
+            {
+
             }
         }
 

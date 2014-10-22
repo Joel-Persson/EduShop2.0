@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using EduShop_Database;
@@ -63,18 +64,27 @@ namespace EduShop_Unsecure.Models
 
         public static ProductModel ConvertToProductModel(Product product)
         {
-            var productModel = new ProductModel()
+            try
             {
-                Id = product.Id,
-                Description = product.Description,
-                AverageRating = product.AverageRating,
-                Category = product.Category,
-                ImgUrl = product.ImgUrl,
-                Name = product.Name,
-                Price = product.Price,
-                ShortDescription = product.ShortDescription
-            };
-            return productModel;
+                var productModel = new ProductModel()
+                {
+                    Id = product.Id,
+                    Description = product.Description,
+                    AverageRating = product.AverageRating,
+                    Category = product.Category,
+                    ImgUrl = product.ImgUrl,
+                    Name = product.Name,
+                    Price = product.Price,
+                    ShortDescription = product.ShortDescription
+                };
+                return productModel;
+            }
+            catch (Exception)
+            {              
+             
+
+            }
+           
         }
 
         public static List<ProductModel> ProductModelsToList()

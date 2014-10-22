@@ -102,8 +102,15 @@ namespace EduShop_Unsecure.Controllers
         [HttpPost]
         public ActionResult ProductInfo(ProductInfoModel review)
         {
-            ReviewModel.AddReview(ReviewModel.ConvertToReview(review.ReviewModel));
-            //ReviewModel.AddReviewToDB(ReviewModel.ConvertToReview(review.ReviewModel));
+            if (Settings.IsSecured)
+            {
+                ReviewModel.AddReview(ReviewModel.ConvertToReview(review.ReviewModel));
+            }
+            else
+            {
+                ReviewModel.AddReviewToDB(ReviewModel.ConvertToReview(review.ReviewModel));
+            }
+     
             ProductModel.AddOrUpdateProductRating(review.ReviewModel.ProductId);
             return RedirectToAction("ProductInfo", "Home", new { id = review.ReviewModel.ProductId });
         }
