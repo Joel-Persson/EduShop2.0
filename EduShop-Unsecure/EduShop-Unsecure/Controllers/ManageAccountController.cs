@@ -28,7 +28,7 @@ namespace EduShop_Unsecure.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult Login(UserModel model, string url)
         {
             if (ModelState.IsValid)
@@ -111,7 +111,7 @@ namespace EduShop_Unsecure.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult Register(UserModel model)
         {
             //GetErrorListFromModelState(ModelState);
@@ -197,7 +197,7 @@ namespace EduShop_Unsecure.Controllers
 
         [HttpPost]
         [Authorize]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult Edit(UserModel model)
         {
             //GetErrorListFromModelState(ModelState);

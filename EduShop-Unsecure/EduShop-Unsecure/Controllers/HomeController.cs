@@ -100,7 +100,6 @@ namespace EduShop_Unsecure.Controllers
         [AllowAnonymous]
         [ValidateInput(false)]
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult ProductInfo(ProductInfoModel review)
         {
             if (Settings.IsSecured)

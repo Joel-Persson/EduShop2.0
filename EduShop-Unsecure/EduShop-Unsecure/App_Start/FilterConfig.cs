@@ -1,5 +1,6 @@
 ﻿using System.Web;
 using System.Web.Mvc;
+using EduShop_Unsecure.Models;
 
 namespace EduShop_Unsecure
 {
@@ -8,6 +9,10 @@ namespace EduShop_Unsecure
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+            if (Settings.IsSecured)
+            {
+                filters.Add(new ValidateAntiForgeryTokenAttribute());
+            }
         }
     }
 }
