@@ -23,6 +23,8 @@
             <br />
             @using (Html.BeginForm())
             {
+                @Html.AntiForgeryToken()
+
                 @Html.LabelFor(m => m.Email, "Email:")
                 @Html.TextBoxFor(m => Model.Email, new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => Model.Email)
@@ -44,7 +46,7 @@
                 @Html.ValidationMessageFor(m => Model.Address)
                 <br />
                 @Html.LabelFor(m => Model.City, "City:")
-                @Html.TextBoxFor(m => Model.City, new { @class = "form-control"})
+                @Html.TextBoxFor(m => Model.City, new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => Model.City)
                 <br />
                 @Html.LabelFor(m => Model.Zip, "Zip:")

@@ -23,14 +23,15 @@
             <br />
             @using (Html.BeginForm())
             {
+                @Html.AntiForgeryToken()
                 @Html.LabelFor(m => Model.Password, "Current password:")
                 @Html.PasswordFor(m => Model.Password, new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => Model.Password)
                 <br />
                 @Html.LabelFor(m => Model.NewPassword, "New password:")
-                @Html.PasswordFor(m => Model.NewPassword, new{@class = "form-control"})
+                @Html.PasswordFor(m => Model.NewPassword, new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => Model.Password)
-                <br/>
+                <br />
                 @Html.LabelFor(m => Model.Firstname, "Firstname:")
                 @Html.TextBoxFor(m => Model.Firstname, new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => Model.Firstname)

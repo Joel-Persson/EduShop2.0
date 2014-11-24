@@ -100,6 +100,7 @@ namespace EduShop_Unsecure.Controllers
         [AllowAnonymous]
         [ValidateInput(false)]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult ProductInfo(ProductInfoModel review)
         {
             if (Settings.IsSecured)
@@ -108,7 +109,8 @@ namespace EduShop_Unsecure.Controllers
             }
             else
             {
-                ReviewModel.AddReviewToDB(ReviewModel.ConvertToReview(review.ReviewModel));
+                ReviewModel.AddReview(ReviewModel.ConvertToReview(review.ReviewModel));
+                //ReviewModel.AddReviewToDB(ReviewModel.ConvertToReview(review.ReviewModel));
             }
      
             ProductModel.AddOrUpdateProductRating(review.ReviewModel.ProductId);

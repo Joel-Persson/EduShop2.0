@@ -1,7 +1,9 @@
 ﻿@model EduShop_Unsecure.Models.UserModel
-
 @using (@Html.BeginForm("Login", "ManageAccount",new{url = HttpContext.Current.Request.Url.AbsoluteUri}, FormMethod.Post))
 {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(false)
+
     @Html.LabelFor(m => Model.Email, "Email:")
     @Html.TextBoxFor(m => Model.Email, new { @class = "form-control" })
     @Html.ValidationMessageFor(m=> Model.Email)

@@ -64,8 +64,6 @@ namespace EduShop_Unsecure.Models
 
         public static ProductModel ConvertToProductModel(Product product)
         {
-            try
-            {
                 var productModel = new ProductModel()
                 {
                     Id = product.Id,
@@ -78,12 +76,6 @@ namespace EduShop_Unsecure.Models
                     ShortDescription = product.ShortDescription
                 };
                 return productModel;
-            }
-            catch (Exception)
-            {              
-             
-
-            }
            
         }
 

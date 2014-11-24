@@ -110,3 +110,13 @@ a.list-group-item:hover {
     height: auto;
     max-width: 100%;
 }
+
+.col-md-4 {
+    margin:15px 0;
+    border-left: none;
+}
+
+    .col-md-4:first-child {
+        margin: 15px 0;
+        border-left: none;
+    }

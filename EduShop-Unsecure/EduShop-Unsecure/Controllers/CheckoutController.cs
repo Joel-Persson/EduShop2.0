@@ -52,6 +52,7 @@ namespace EduShop_Unsecure.Controllers
 
         [HttpPost]
         [Authorize]
+        [ValidateAntiForgeryToken]
         public ActionResult Checkout(OrderModel model)
         {
             if(Session["order"] != null)

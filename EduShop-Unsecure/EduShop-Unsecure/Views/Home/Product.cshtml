@@ -31,13 +31,13 @@
                         }
                     </h4>
                 </div>
-                <div class="row">
+                
                     @foreach (var item in Model)
                     {
                         @Html.Action("ProductPartial", "Home", new { item.Id })
                     }
-                </div>
-
+                
+                <div style="clear:both"></div>
             </div>
 
         </article>

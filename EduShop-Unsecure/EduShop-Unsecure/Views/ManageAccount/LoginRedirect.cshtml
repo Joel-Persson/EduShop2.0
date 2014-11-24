@@ -1,10 +1,26 @@
 ﻿@using EduShop_Unsecure.Models
-
+@model UserModel
 @{
     ViewBag.Title = "LoginRedirect";
 }
-<div class="contentcontainer">
-    @Html.Partial("_Login", new UserModel())
-</div>
+<link href="~/Content/Admin.css" rel="stylesheet" />
+
+<div class="panel panel-default">
+        <div class="panel-heading">
+            Login
+        </div>
+    <div class="col-md-6" style="padding:20px;">
+        @if (@Model != null)
+        {
+            @Html.Partial("_Login", @Model)
+        }
+        else
+        {
+           @Html.Partial("_Login", new UserModel())
+        }
+        
+    </div>
+        <div style="clear:both"></div>
+        </div>
 
 

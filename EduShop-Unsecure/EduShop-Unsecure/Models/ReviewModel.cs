@@ -78,8 +78,6 @@ namespace EduShop_Unsecure.Models
         }
         public static void AddReviewToDB(Review review)
         {
-            try
-            {
                 string conString = ConfigurationManager.ConnectionStrings["DatabaseModel"].ConnectionString;
                 using (SqlConnection connection = new SqlConnection(conString))
                 {
@@ -93,11 +91,6 @@ namespace EduShop_Unsecure.Models
                     }
                     connection.Close();
                 }
-            }
-            catch (Exception e)
-            {
-
-            }
         }
 
         public static List<ReviewModel> ReviewModelsToList(int id)

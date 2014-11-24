@@ -4,7 +4,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using System.Web.Security;
+using System.Web.UI.WebControls;
 using EduShop_Database;
 using EduShop_Unsecure.Models;
 using Microsoft.Owin.Security;
@@ -13,29 +15,20 @@ namespace EduShop_Unsecure.Controllers
 {
     public class ManageAccountController : Controller
     {
-        [AllowAnonymous]
-        [ChildActionOnly]
-        public ActionResult Login()
-        {
-            if (HttpContext.Request.Cookies.Get(FormsAuthentication.FormsCookieName) == null)
-            {
-                return PartialView("_Login", new UserModel());
-            }
-            return RedirectToAction("Index", "Home");
-        }
-
-        [AllowAnonymous]
-        public ActionResult LoginRedirect(string url)
-        {
-            if (HttpContext.Request.Cookies.Get(FormsAuthentication.FormsCookieName) == null)
-            {
-                return View();
-            }
-            return RedirectToAction("Index", "Home");
-        }
+        //[AllowAnonymous]
+        //[ChildActionOnly]
+        //public ActionResult Login()
+        //{
+        //    if (HttpContext.Request.Cookies.Get(FormsAuthentication.FormsCookieName) == null)
+        //    {
+        //        return PartialView("_Login", new UserModel());
+        //    }
+        //    return RedirectToAction("Index", "Home");
+        //}
 
         [HttpPost]
         [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public ActionResult Login(UserModel model, string url)
         {
             if (ModelState.IsValid)
@@ -54,9 +47,23 @@ namespace EduShop_Unsecure.Controllers
                         return Redirect(url);
                     }
                 }
-                return Redirect(url);
             }
+            ModelState.AddModelError("Valid","Invalid Email or Password");
             return Redirect(url);
+        }
+
+        [AllowAnonymous]
+        public ActionResult LoginRedirect(string url, UserModel model)
+        {
+            if (HttpContext.Request.Cookies.Get(FormsAuthentication.FormsCookieName) == null)
+            {
+                return View(model);
+            }
+            if (url != null)
+            {
+                Redirect(url);
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         private void SetAdminCookie()
@@ -104,6 +111,7 @@ namespace EduShop_Unsecure.Controllers
 
         [HttpPost]
         [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public ActionResult Register(UserModel model)
         {
             //GetErrorListFromModelState(ModelState);
@@ -189,6 +197,7 @@ namespace EduShop_Unsecure.Controllers
 
         [HttpPost]
         [Authorize]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(UserModel model)
         {
             //GetErrorListFromModelState(ModelState);
