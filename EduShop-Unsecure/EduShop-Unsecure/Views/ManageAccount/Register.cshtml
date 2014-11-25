@@ -1,4 +1,5 @@
-﻿@model EduShop_Unsecure.Models.UserModel
+﻿@using EduShop_Unsecure.Models
+@model EduShop_Unsecure.Models.UserModel
 @{
     ViewBag.Title = "Register";
 }
@@ -23,8 +24,10 @@
             <br />
             @using (Html.BeginForm())
             {
-                @Html.AntiForgeryToken()
-
+                if (Settings.IsSecured)
+                {
+                    @Html.AntiForgeryToken()
+                }
                 @Html.LabelFor(m => m.Email, "Email:")
                 @Html.TextBoxFor(m => Model.Email, new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => Model.Email)

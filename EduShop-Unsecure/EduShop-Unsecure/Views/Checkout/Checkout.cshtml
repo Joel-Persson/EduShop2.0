@@ -46,7 +46,10 @@
             <br />
             @using (Html.BeginForm())
             {
+                if (Settings.IsSecured)
+                {
                     @Html.AntiForgeryToken()
+                }
                 @Html.LabelFor(m => Model.Firstname, "Firstname:")
                 @Html.TextBoxFor(m => Model.Firstname, new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => m.Firstname)

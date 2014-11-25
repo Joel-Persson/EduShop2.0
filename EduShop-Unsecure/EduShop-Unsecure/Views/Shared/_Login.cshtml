@@ -1,7 +1,11 @@
-﻿@model EduShop_Unsecure.Models.UserModel
+﻿@using EduShop_Unsecure.Models
+@model EduShop_Unsecure.Models.UserModel
 @using (@Html.BeginForm("Login", "ManageAccount",new{url = HttpContext.Current.Request.Url.AbsoluteUri}, FormMethod.Post))
 {
-    @Html.AntiForgeryToken()
+    if (Settings.IsSecured)
+    {
+        @Html.AntiForgeryToken()
+    }
     @Html.ValidationSummary(false)
 
     @Html.LabelFor(m => Model.Email, "Email:")

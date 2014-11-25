@@ -1,4 +1,5 @@
-﻿@model EduShop_Unsecure.Models.UserModel
+﻿@using EduShop_Unsecure.Models
+@model EduShop_Unsecure.Models.UserModel
 @{
     ViewBag.Title = "Edit";
 }
@@ -23,7 +24,10 @@
             <br />
             @using (Html.BeginForm())
             {
-                @Html.AntiForgeryToken()
+                if (Settings.IsSecured)
+                {
+                    @Html.AntiForgeryToken()
+                }
                 @Html.LabelFor(m => Model.Password, "Current password:")
                 @Html.PasswordFor(m => Model.Password, new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => Model.Password)
