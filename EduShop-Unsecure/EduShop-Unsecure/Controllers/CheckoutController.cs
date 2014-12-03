@@ -9,13 +9,10 @@ namespace EduShop_Unsecure.Controllers
 {
     public class CheckoutController : Controller
     {
-        // GET: Checkout
         [HttpGet]
         [Authorize]
         public ActionResult Checkout()
         {
-            //if (Request.Cookies["Auth"] != null)
-            //{
                 if (Session["Order"] != null)
                 {
                     var list = Session["Order"] as List<OrderRowModel>;
@@ -39,7 +36,6 @@ namespace EduShop_Unsecure.Controllers
                     }
                     return RedirectToAction("Index", "Home");
                 }
-            //}
             return RedirectToAction("Index", "Home");
         }
 
@@ -52,7 +48,6 @@ namespace EduShop_Unsecure.Controllers
 
         [HttpPost]
         [Authorize]
-        //[ValidateAntiForgeryToken]
         public ActionResult Checkout(OrderModel model)
         {
             if(Session["order"] != null)

@@ -15,20 +15,8 @@ namespace EduShop_Unsecure.Controllers
 {
     public class ManageAccountController : Controller
     {
-        //[AllowAnonymous]
-        //[ChildActionOnly]
-        //public ActionResult Login()
-        //{
-        //    if (HttpContext.Request.Cookies.Get(FormsAuthentication.FormsCookieName) == null)
-        //    {
-        //        return PartialView("_Login", new UserModel());
-        //    }
-        //    return RedirectToAction("Index", "Home");
-        //}
-
         [HttpPost]
         [AllowAnonymous]
-        //[ValidateAntiForgeryToken]
         public ActionResult Login(UserModel model, string url)
         {
             if (ModelState.IsValid)
@@ -48,7 +36,7 @@ namespace EduShop_Unsecure.Controllers
                     }
                 }
             }
-            ModelState.AddModelError("Valid","Invalid Email or Password");
+            ModelState.AddModelError("Valid", "Invalid Email or Password");
             return Redirect(url);
         }
 
@@ -68,7 +56,7 @@ namespace EduShop_Unsecure.Controllers
 
         private void SetAdminCookie()
         {
-            HttpCookie adminCookie = new HttpCookie("Admin") {HttpOnly = true};
+            HttpCookie adminCookie = new HttpCookie("Admin") { HttpOnly = true };
             adminCookie.Value = "true";
             Response.Cookies.Add(adminCookie);
         }
@@ -76,26 +64,17 @@ namespace EduShop_Unsecure.Controllers
         private void SetAuthenticationCookie(string user)
         {
             FormsAuthentication.SetAuthCookie(user, true);
-            //HttpCookie authentication = new HttpCookie("Auth") { HttpOnly = true };
-            //authentication.Value = user;
-            //Response.Cookies.Add(authentication);
         }
 
         [Authorize]
         public ActionResult LogOut(string url)
         {
-            //if (Request.Cookies["Auth"] != null || Request.Cookies["Admin"] != null)
-            //{
-                //HttpCookie authentication = new HttpCookie("Auth");
-                //authentication.Expires = DateTime.Now.AddDays(-1d);
-                //Response.Cookies.Add(authentication);
-                Session["Order"] = null;
-                FormsAuthentication.SignOut();
+            Session["Order"] = null;
+            FormsAuthentication.SignOut();
 
-                HttpCookie admin = new HttpCookie("Admin");
-                admin.Expires = DateTime.Now.AddDays(-1d);
-                Response.Cookies.Add(admin);
-            //}
+            HttpCookie admin = new HttpCookie("Admin");
+            admin.Expires = DateTime.Now.AddDays(-1d);
+            Response.Cookies.Add(admin);
             return Redirect(url);
         }
 
@@ -111,10 +90,8 @@ namespace EduShop_Unsecure.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        //[ValidateAntiForgeryToken]
         public ActionResult Register(UserModel model)
         {
-            //GetErrorListFromModelState(ModelState);
             if (ModelState.IsValid)
             {
                 var user = new User();
@@ -177,15 +154,9 @@ namespace EduShop_Unsecure.Controllers
         [Authorize]
         public ActionResult Edit()
         {
-            //if (Request.Cookies["Auth"] != null)
-            //{
-       
-
             var ticket = GetAuthCookieValue();
 
             return View(UserModel.GetUser(ticket.Name));
-            //}
-            //return RedirectToAction("Index", "Home");
         }
 
         private FormsAuthenticationTicket GetAuthCookieValue()
@@ -197,10 +168,8 @@ namespace EduShop_Unsecure.Controllers
 
         [HttpPost]
         [Authorize]
-        //[ValidateAntiForgeryToken]
         public ActionResult Edit(UserModel model)
         {
-            //GetErrorListFromModelState(ModelState);
             if (ModelState.IsValid)
             {
                 User user = UserModel.CheckForUser(model);

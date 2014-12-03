@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using EduShop_Database;
 using EduShop_Unsecure.Models;
 
 namespace EduShop_Unsecure.Controllers
@@ -109,7 +108,6 @@ namespace EduShop_Unsecure.Controllers
             else
             {
                 ReviewModel.AddReview(ReviewModel.ConvertToReview(review.ReviewModel));
-                //ReviewModel.AddReviewToDB(ReviewModel.ConvertToReview(review.ReviewModel));
             }
      
             ProductModel.AddOrUpdateProductRating(review.ReviewModel.ProductId);
